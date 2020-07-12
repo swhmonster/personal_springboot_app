@@ -1,12 +1,12 @@
 package com.walter.spbt.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloWorldController {
-    @GetMapping("helloworld")
+    @RequestMapping("/")
     public String sayHello(){
-        return "hello world";
+        return "static/index";
     }
 }
