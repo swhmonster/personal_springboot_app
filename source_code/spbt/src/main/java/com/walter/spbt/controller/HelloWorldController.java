@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloWorldController {
-    @RequestMapping("/")
+    /*@RequestMapping("/")
     public String sayHello(){
         return "static/index";
-    }
+    }*/
 }
