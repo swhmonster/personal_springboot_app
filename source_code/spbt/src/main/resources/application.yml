@@ -1,2 +1,6 @@
 server:
   port: 18081
+  servlet:
+    session:
+      cookie:
+        http-only: true
