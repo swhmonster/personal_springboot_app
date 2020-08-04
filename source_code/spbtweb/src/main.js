@@ -3,10 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import editormd from './components/editormd/MdToHtml'
+import axios from 'axios'
 
 Vue.config.productionTip = false
-Vue.prototype.$editormd = editormd
+Vue.prototype.$axios = axios
 
 /* eslint-disable no-new */
 new Vue({
