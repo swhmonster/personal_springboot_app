@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>线索登记组件集成对应修改梳理 | VuePress</title>
+    <meta name="generator" content="VuePress 1.5.3">
+    
+    <meta name="description" content="the new world">
+    <link rel="preload" href="/assets/css/0.styles.93986fde.css" as="style"><link rel="preload" href="/assets/js/app.f21cdc56.js" as="script"><link rel="preload" href="/assets/js/2.9f03f641.js" as="script"><link rel="preload" href="/assets/js/12.e61c4ca7.js" as="script"><link rel="prefetch" href="/assets/js/10.c680aa57.js"><link rel="prefetch" href="/assets/js/11.0f25b5a9.js"><link rel="prefetch" href="/assets/js/3.afe6d1cb.js"><link rel="prefetch" href="/assets/js/4.c57904d7.js"><link rel="prefetch" href="/assets/js/5.c57eb98c.js"><link rel="prefetch" href="/assets/js/6.cf5042a3.js"><link rel="prefetch" href="/assets/js/7.2342caa0.js"><link rel="prefetch" href="/assets/js/8.90d61c22.js"><link rel="prefetch" href="/assets/js/9.27cb5384.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.93986fde.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">VuePress</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <!----> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="线索登记组件集成对应修改梳理"><a href="#线索登记组件集成对应修改梳理" class="header-anchor">#</a> 线索登记组件集成对应修改梳理</h1> <blockquote><p>author: 孙文浩</p></blockquote> <blockquote><p>date: 2019.12.24.</p></blockquote> <hr> <h2 id="目录"><a href="#目录" class="header-anchor">#</a> 目录</h2> <ul><li><a href="#%E5%AF%B9%E6%8E%A5%E6%A6%82%E8%BF%B0">对接概述</a></li> <li><a href="#%E6%A6%82%E8%A6%81%E8%AE%BE%E8%AE%A1">概要设计</a> <ul><li>对接模块</li> <li>修改范围梳理</li> <li>功能模块划分、开发任务梳理</li></ul></li> <li><a href="#%E6%A8%A1%E5%9D%97%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1">模块详细设计</a> <ul><li>字段映射共用方法</li> <li>附件</li></ul></li></ul> <hr> <h2 id="对接概述"><a href="#对接概述" class="header-anchor">#</a> 对接概述</h2> <ol><li>使用组件html、controller、service</li> <li>dao层业务系统自定义，组件页面字段与后台字段做映射转换</li> <li>库表结构修改，缺字段加字段</li> <li>组件集成在zjjdApi中，执纪监督嵌页面方式</li></ol> <hr> <h2 id="概要设计"><a href="#概要设计" class="header-anchor">#</a> 概要设计</h2> <ol><li>对接模块</li></ol> <ul><li>基本信息</li> <li>被反映人/被举报人</li> <li>反映人/举报人</li> <li>问题线索摘要</li> <li>违纪违法</li> <li>附件</li></ul> <ol start="2"><li>修改范围梳理</li></ol> <ul><li><p>公共修改</p> <div class="language- extra-class"><pre><code>  1.表结构修改，增加缺少字段
+  2.组件页面字段与后台表字段，映射转换
+  3.模块嵌入页面，相关列表展示适配修改
+  4.相关流程代码适配调整（线索流转）
+  5.相关接口适配修改（如调查措施等）
+  6.单值代码梳理，更改或做映射处理，尽可能使用统一后的单值代码，尽可能兼容原系统单值代码，影响范围大的单值代码可暂时不做修改
+  7.附件，表结构设计适配新附件
+  8.问责模块联动
+</code></pre></div></li> <li><p>谈话函询</p> <div class="language- extra-class"><pre><code>  1.被举报人/被反映人：
+      模块替换
+  2.谈话：
+      附件上传
+  3.谈话办理节结束：
+      表格沿用
+      谈话函询结论，编辑弹框，使用组件页面
+      问责模块展示控制调整
+      问责建议编辑弹框可复用登记组件
+      附件
+</code></pre></div></li> <li><p>初步核实</p> <div class="language- extra-class"><pre><code>  1.被举报人/被反映人：
+      模块替换
+  2.初核方案：
+      附件上传
+  3.初核报告：
+     问责对象信息的维护替换（添加/编辑，单位/个人）
+     附件上传
+     初核结论违纪违法
+     问责模块展示控制调整
+  4.结束初核的校验（违纪违法、个人/单位 信息必填项）
+</code></pre></div></li> <li><p>立案审查调查</p> <div class="language- extra-class"><pre><code>  1.立案信息
+      上传附件
+  2.被调查人情况
+      信息登记模块替换
+  3.审查调查方案
+      上传附件
+  4.延长审查调查时限
+      上传附件
+  5.审查调查情况
+      上传相关材料
+      审查调查情况违纪违法信息编辑
+      问责对象信息维护替换
+  6.移送审理
+      上传附件
+</code></pre></div></li> <li><p>案件审理</p> <div class="language- extra-class"><pre><code>  案件审理办理（A6前后端分离）：
+      1.延长审理时限：
+          附件
+      2.检查机关提前介入：
+          附件
+      3.审理结论：
+          附件
+          问责对象编辑弹框可复用登记组件
+          适配违纪违法行为
+      4.移送司法：
+          附件
+      5.结案登记：
+          附件
+</code></pre></div></li></ul> <ol start="3"><li><p>功能模块划分、开发任务梳理</p> <div class="language- extra-class"><pre><code> 1.被反映人/被举报人模块，嵌页面、后台逻辑处理
+     涉及业务模块：谈话函询、初步核实、立案审查调查
+ 2.结论模块，违纪违法行为弹框,嵌页面、后台逻辑处理
+     涉及业务模块：谈话函询、初步核实、立案审查调查、案件审理办理
+ 3.附件模块，表结构设计，嵌页面、后台逻辑处理
+     涉及业务模块：谈话函询、初步核实、立案审查调查、案件审理办理（参考各模块梳理）
+ 4.问责信息录入模块，问责模块相关联动，嵌页面、后台逻辑处理
+     涉及业务模块：谈话函询、初步核实、立案审查调查、案件审理办理
+ 5.单值代码梳理
+ 6.字段梳理，表结构调整
+ 7.单值代码映射共用方法
+ 8.字段映射共用方法
+ 9.嵌页面方式
+ 10.登记立案
+</code></pre></div><table><thead><tr><th>功能点</th> <th style="text-align:center;">开发人员</th> <th style="text-align:center;">工作量(人/天)</th></tr></thead> <tbody><tr><td>9.嵌页面方式</td> <td style="text-align:center;">孙文浩、林国庆</td> <td style="text-align:center;">1</td></tr> <tr><td>6.字段梳理，表结构调整</td> <td style="text-align:center;">孙文浩</td> <td style="text-align:center;">0.75</td></tr> <tr><td>8.字段映射共用方法</td> <td style="text-align:center;">孙文浩</td> <td style="text-align:center;">0.75</td></tr> <tr><td>2.结论模块</td> <td style="text-align:center;">孙文浩</td> <td style="text-align:center;">1</td></tr> <tr><td>10.登记立案</td> <td style="text-align:center;">孙文浩</td> <td style="text-align:center;">1</td></tr> <tr><td>3.附件模块(案件审理办理+线索排查会)</td> <td style="text-align:center;">孙文浩</td> <td style="text-align:center;">1.5</td></tr> <tr><td>1.被反映人/被举报人模块</td> <td style="text-align:center;">林国庆</td> <td style="text-align:center;">1.25</td></tr> <tr><td>3.附件模块(执纪监督+案管)</td> <td style="text-align:center;">林国庆</td> <td style="text-align:center;">1.5</td></tr> <tr><td>4.问责信息录入模块</td> <td style="text-align:center;">林国庆</td> <td style="text-align:center;">0.75</td></tr> <tr><td>5.单值代码梳理</td> <td style="text-align:center;">林国庆</td> <td style="text-align:center;">0.75</td></tr> <tr><td>7.单值代码映射共用方法</td> <td style="text-align:center;">林国庆</td> <td style="text-align:center;">0.75</td></tr></tbody></table></li></ol> <hr> <h2 id="模块详细设计"><a href="#模块详细设计" class="header-anchor">#</a> 模块详细设计</h2> <ul><li><p>库表设计
+增加表结构：新附件表、历次任职信息、家庭成员西信息
+表结构修改：参考下面字段梳理</p></li> <li><p>字段映射共用方法</p> <p>使用场景：同样业务含义的两个对象中，两个不同名、但同含义的两个字段做映射处理。</p> <blockquote><p>业务系统列表展示单独做数据处理，zjjdApi直接存数，保障组件数据回写</p></blockquote> <ol><li><p>差异字段梳理：</p> <details><summary> 问题线索t_zhba_wtxs:</summary> <table><thead><tr><th>案管</th> <th>执纪</th> <th>字段含义</th> <th style="text-align:center;">新增</th> <th>备注</th></tr></thead> <tbody><tr><td></td> <td></td> <td></td> <td style="text-align:center;"></td> <td></td></tr></tbody></table></details> <details><summary> 被举报人信息（问责对象信息）t_zhba_bjbr、t_zhba_thhx_bjbr、t_zhba_cbhs_bjbr：</summary> <blockquote><p>问责对象信息，需要单独处理溢出的字段</p></blockquote> <table><thead><tr><th>案管</th> <th>执纪</th> <th>字段含义</th> <th style="text-align:center;">新增</th> <th>备注</th></tr></thead> <tbody><tr><td>c_bh_wtxs</td> <td>c_ajbh</td> <td>线索编号</td> <td style="text-align:center;"></td> <td></td></tr> <tr><td>c_dxlx</td> <td>c_sfdw</td> <td>对象类型</td> <td style="text-align:center;"></td> <td>单值代码要增加涉案人员</td></tr> <tr><td>c_zjhm</td> <td>c_sfzh</td> <td>证件号码</td> <td style="text-align:center;"></td> <td></td></tr> <tr><td>c_dwwyjb</td> <td>c_sfdwwy</td> <td>党委委员级别</td> <td style="text-align:center;"></td> <td></td></tr> <tr><td>c_zgddbjb</td> <td>c_sfddb</td> <td>中共党代表级别</td> <td style="text-align:center;"></td> <td></td></tr> <tr><td>c_jwwyjb</td> <td>c_sfjwwy</td> <td>纪委委员级别</td> <td style="text-align:center;"></td> <td></td></tr> <tr><td>c_sfybs</td> <td>c_ybswj</td> <td>是否一把手</td> <td style="text-align:center;"></td> <td></td></tr> <tr><td>c_ybswj</td> <td>c_wjqx</td> <td>一把手违纪情形</td> <td style="text-align:center;"></td> <td></td></tr> <tr><td>dt_cjsj</td> <td>d_cj_sj</td> <td>创建时间</td> <td style="text-align:center;"></td> <td></td></tr> <tr><td>dt_zhgxsj</td> <td>d_zhgx_sj</td> <td>修改时间</td> <td style="text-align:center;"></td> <td></td></tr> <tr><td>c_sfjcdx</td> <td>c_sfxzjcdx</td> <td>是否监察对象</td> <td style="text-align:center;"></td> <td></td></tr> <tr><td>c_jcwwyjb</td> <td></td> <td>监委委员级别</td> <td style="text-align:center;">是</td> <td></td></tr> <tr><td>c_dnzw</td> <td></td> <td>党内职务</td> <td style="text-align:center;">是</td> <td></td></tr> <tr><td>c_qtzw</td> <td></td> <td>其他职务</td> <td style="text-align:center;">是</td> <td></td></tr> <tr><td>c_lxfs</td> <td></td> <td>联系方式</td> <td style="text-align:center;">是</td> <td></td></tr> <tr><td>lc_qtsm</td> <td></td> <td>其他说明</td> <td style="text-align:center;">是</td> <td></td></tr> <tr><td>c_gjjcdxlx</td> <td></td> <td>国家监察对象类型</td> <td style="text-align:center;">是</td> <td>涉及单值代码修改</td></tr> <tr><td>arr_jcdxlx</td> <td></td> <td>监察对象身份</td> <td style="text-align:center;">是</td> <td></td></tr> <tr><td>arr_qtsf</td> <td></td> <td>其他身份</td> <td style="text-align:center;">是</td> <td></td></tr> <tr><td>c_rddbjc</td> <td></td> <td>人大代表届次</td> <td style="text-align:center;">是</td> <td></td></tr> <tr><td>c_zxwyjc</td> <td></td> <td>政协委员届次</td> <td style="text-align:center;">是</td> <td></td></tr> <tr><td>c_dwlx</td> <td></td> <td>单位类型</td> <td style="text-align:center;">是</td> <td></td></tr> <tr><td>c_sshy</td> <td></td> <td>所属行业</td> <td style="text-align:center;">是</td> <td></td></tr> <tr><td>c_sarylx</td> <td></td> <td>涉案人员类型</td> <td style="text-align:center;">是</td> <td></td></tr> <tr><td>c_sfjjjcgb</td> <td></td> <td>是否纪检监察干部</td> <td style="text-align:center;">是</td> <td></td></tr></tbody></table></details> <details><summary> 立案审查t_zhba_lasc：</summary> <table><thead><tr><th>案管</th> <th>执纪</th> <th>字段含义</th> <th style="text-align:center;">新增</th> <th>备注</th></tr></thead> <tbody><tr><td>c_djbm</td> <td>c_cbbm</td> <td>承办部门</td> <td style="text-align:center;"></td> <td></td></tr> <tr><td>c_djdw</td> <td>c_cbdw</td> <td>承办单位</td> <td style="text-align:center;"></td> <td></td></tr> <tr><td>c_bljg</td> <td>c_lajg</td> <td>立案机关</td> <td style="text-align:center;"></td> <td></td></tr> <tr><td>d_djrq</td> <td>d_slrq</td> <td>受理日期</td> <td style="text-align:center;"></td> <td></td></tr> <tr><td>c_djr</td> <td>c_slr</td> <td>受理人</td> <td style="text-align:center;"></td> <td></td></tr> <tr><td>c_ajly</td> <td>c_laajly</td> <td>案件来源</td> <td style="text-align:center;"></td> <td></td></tr> <tr><td>dt_cjsj</td> <td>d_cj_sj</td> <td>创建时间</td> <td style="text-align:center;"></td> <td></td></tr> <tr><td>dt_zhgxsj</td> <td>d_zhgx_sj</td> <td>最后更新时间</td> <td style="text-align:center;"></td> <td></td></tr></tbody></table></details> <details><summary> 被调查人t_zhba_bdcr：</summary> <p>同被调查人
+</p></details><p></p> <details><summary> 问题线索摘要t_zhba_xszy：</summary> <table><thead><tr><th>案管</th> <th>执纪</th> <th>字段含义</th> <th style="text-align:center;">新增</th> <th>备注</th></tr></thead> <tbody><tr><td>c_bh_bjbr</td> <td>c_bjbrbh</td> <td>被举报人编号</td> <td style="text-align:center;"></td> <td></td></tr> <tr><td>c_bh_wtxs</td> <td>c_xsbh</td> <td>问题线索编号</td> <td style="text-align:center;"></td> <td></td></tr> <tr><td>lc_wtxszy</td> <td>c_wtxszy</td> <td>问题线索摘要</td> <td style="text-align:center;"></td> <td></td></tr> <tr><td>c_nbyj</td> <td></td> <td>拟办意见</td> <td style="text-align:center;">是</td> <td></td></tr></tbody></table></details> <details><summary> 违纪违法t_zhba_wjwf：</summary> <table><thead><tr><th>案管</th> <th>执纪</th> <th>字段含义</th> <th style="text-align:center;">新增</th> <th>备注</th></tr></thead> <tbody><tr><td>c_bh_xszy</td> <td>c_xszybh</td> <td>线索摘要编号</td> <td style="text-align:center;"></td> <td></td></tr> <tr><td>c_bh_bjbr</td> <td>c_bjbrbh</td> <td>被举报人编号</td> <td style="text-align:center;"></td> <td></td></tr> <tr><td>c_yjfl</td> <td>c_wjyjfl</td> <td>一级分类</td> <td style="text-align:center;"></td> <td></td></tr> <tr><td>arr_ejfl</td> <td>c_wjejfl</td> <td>二级分类</td> <td style="text-align:center;"></td> <td>需要字段修改</td></tr> <tr><td>dt_cjsj</td> <td>d_cj_sj</td> <td>创建时间</td> <td style="text-align:center;"></td> <td></td></tr> <tr><td>dt_zhgxsj</td> <td>d_zhgx_sj</td> <td>最后更新时间</td> <td style="text-align:center;"></td> <td></td></tr></tbody></table></details> <details><summary> 举报人t_zhba_jbr：</summary> <table><thead><tr><th>案管</th> <th>执纪</th> <th>字段含义</th> <th>新增</th> <th>备注</th></tr></thead> <tbody><tr><td>c_bh_wtxs</td> <td>c_ajbh</td> <td>问题线索编号</td> <td></td> <td>确认下该字段是否含义一致</td></tr> <tr><td>c_gzdw</td> <td>c_dwmc</td> <td>工作单位</td> <td></td> <td>字段名称有差异</td></tr> <tr><td>dt_cjsj</td> <td>d_cj_sj</td> <td>创建时间</td> <td></td> <td>字段名称不一致</td></tr> <tr><td>dt_zhgxsj</td> <td>d_zhgx_sj</td> <td>最后更新时间</td> <td></td> <td>字段名称不一致</td></tr> <tr><td>c_jbrqk</td> <td>lc_jbrqk</td> <td>举报人情况</td> <td></td> <td>字段名称不一致一个是long，一个不是</td></tr> <tr><td>c_zzmm</td> <td></td> <td>政治面貌</td> <td>是</td> <td>需要新增</td></tr> <tr><td>c_xzz</td> <td></td> <td>现住址</td> <td>是</td> <td>需要新增</td></tr> <tr><td>c_zjlx</td> <td></td> <td>证件类型</td> <td>是</td> <td>需要新增</td></tr></tbody></table></details></li> <li><p>公共映射方法</p> <p>功能方法：</p> <details><summary>代码实现</summary> <table><thead><tr><th>参数名</th> <th>参数含义</th></tr></thead> <tbody><tr><td>sourceObj</td> <td>需转换对象</td></tr> <tr><td>map</td> <td>映射字段梳理</td></tr> <tr><td>targetClazz</td> <td>映射后的目标class</td></tr> <tr><td>ifSave</td> <td>true:保存，false：查询（数据回写）</td></tr></tbody></table> <div class="language-java extra-class"><pre class="language-java"><code><span class="token comment">/**
+* 字段映射共用方法
+*
+* @param sourceObj
+* @param map
+* @param targetClazz
+* @param &lt;T&gt;
+* @return
+*/</span>
+<span class="token annotation punctuation">@ExceptionTips</span><span class="token punctuation">(</span><span class="token string">&quot;保存字段映射转换异常&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">&gt;</span></span> <span class="token class-name">T</span> <span class="token function">convertColumn</span><span class="token punctuation">(</span><span class="token class-name">Object</span> sourceObj<span class="token punctuation">,</span> <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> map<span class="token punctuation">,</span> <span class="token class-name">Class</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">&gt;</span></span> targetClazz<span class="token punctuation">,</span><span class="token keyword">boolean</span> ifSave<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token class-name">JSONObject</span> jsonObject <span class="token operator">=</span> JSON<span class="token punctuation">.</span><span class="token function">parseObject</span><span class="token punctuation">(</span>JSON<span class="token punctuation">.</span><span class="token function">toJSONString</span><span class="token punctuation">(</span>sourceObj<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ifSave<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        map<span class="token punctuation">.</span><span class="token function">entrySet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span>m <span class="token operator">-&gt;</span> jsonObject<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>m<span class="token punctuation">.</span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> jsonObject<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span>m<span class="token punctuation">.</span><span class="token function">getKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        map<span class="token punctuation">.</span><span class="token function">entrySet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span>m <span class="token operator">-&gt;</span> jsonObject<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>m<span class="token punctuation">.</span><span class="token function">getKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> jsonObject<span class="token punctuation">.</span><span class="token function">getString</span><span class="token punctuation">(</span>m<span class="token punctuation">.</span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> jsonObject<span class="token punctuation">.</span><span class="token function">toJavaObject</span><span class="token punctuation">(</span>targetClazz<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div></details> <details><summary>代码映射字段配置实现</summary> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>thunisoft<span class="token punctuation">.</span>jcw<span class="token punctuation">.</span>agxt<span class="token punctuation">.</span>api<span class="token punctuation">.</span>constant</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util</span><span class="token punctuation">.</span><span class="token class-name">Collections</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util</span><span class="token punctuation">.</span><span class="token class-name">HashMap</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util</span><span class="token punctuation">.</span><span class="token class-name">Map</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">lombok<span class="token punctuation">.</span>experimental</span><span class="token punctuation">.</span><span class="token class-name">UtilityClass</span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
+* @author sunwenhao
+* @date 2019/12/25 11:16
+*/</span>
+<span class="token annotation punctuation">@UtilityClass</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">WtxsdjConstant</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> COL_ZHGXSJ <span class="token operator">=</span> <span class="token string">&quot;d_zhgx_sj&quot;</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> COL_CJSJ <span class="token operator">=</span> <span class="token string">&quot;d_zhgx_sj&quot;</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> BJBR_MAP<span class="token punctuation">;</span>
+
+    <span class="token keyword">static</span> <span class="token punctuation">{</span>
+        <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;cWtxsbh&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;c_ajbh&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;cDxlx&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;c_sfdw&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;cZjhm&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;c_sfzh&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;cDwwyjb&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;c_sfdwwy&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;cZgddbjb&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;c_sfddb&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;cJwwyjb&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;c_sfjwwy&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;cSfybs&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;c_ybswj&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;cYbswj&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;c_wjqx&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;dtCjsj&quot;</span><span class="token punctuation">,</span> COL_ZHGXSJ<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;dtZhgxsj&quot;</span><span class="token punctuation">,</span> COL_ZHGXSJ<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;cSfjcdx&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;c_sfxzjcdx&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        BJBR_MAP <span class="token operator">=</span> <span class="token class-name">Collections</span><span class="token punctuation">.</span><span class="token function">unmodifiableMap</span><span class="token punctuation">(</span>map<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> XSZY_MAP<span class="token punctuation">;</span>
+
+    <span class="token keyword">static</span> <span class="token punctuation">{</span>
+        <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;c_bh_bjbr&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;c_bjbrbh&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;c_bh_wtxs&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;c_xsbh&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;lc_wtxszy&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;c_wtxszy&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        XSZY_MAP <span class="token operator">=</span> <span class="token class-name">Collections</span><span class="token punctuation">.</span><span class="token function">unmodifiableMap</span><span class="token punctuation">(</span>map<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> WJWF_MAP<span class="token punctuation">;</span>
+
+    <span class="token keyword">static</span> <span class="token punctuation">{</span>
+        <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;cBhXszy&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;cXszybh&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;cBhBjbr&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;cBjbrbh&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;cYjfl&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;cWjyjfl&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;arrEjfl&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;cWjejfl&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;dtCjsj&quot;</span><span class="token punctuation">,</span> COL_CJSJ<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;dtZhgxsj&quot;</span><span class="token punctuation">,</span> COL_ZHGXSJ<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        WJWF_MAP <span class="token operator">=</span> <span class="token class-name">Collections</span><span class="token punctuation">.</span><span class="token function">unmodifiableMap</span><span class="token punctuation">(</span>map<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> LASC_MAP<span class="token punctuation">;</span>
+
+    <span class="token keyword">static</span> <span class="token punctuation">{</span>
+        <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;cDjbm&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;c_cbbm&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;c_djdw&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;c_cbdw&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;c_bljg&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;c_lajg&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;d_djrq&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;d_slrq&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;c_djr&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;c_slr&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;c_ajly&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;c_laajly&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;dt_cjsj&quot;</span><span class="token punctuation">,</span> COL_CJSJ<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;dt_zhgxsj&quot;</span><span class="token punctuation">,</span> COL_ZHGXSJ<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        LASC_MAP <span class="token operator">=</span> <span class="token class-name">Collections</span><span class="token punctuation">.</span><span class="token function">unmodifiableMap</span><span class="token punctuation">(</span>map<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div></details></li></ol></li> <li><p>附件</p> <ol><li>表结构同组件表结构，原附件表结构保留</li></ol></li> <li><p>嵌页面方式+组件集成方式</p> <ol><li>嵌页面方式</li></ol> <blockquote><p>部分模块涉及交互方式调整</p></blockquote> <div class="language- extra-class"><pre><code>  通过iframe链接方式，链接中参数根据controller拦截参数设置，尤其为tag，通过参数tag区分组件调用的dao层实现类。
+</code></pre></div><ol start="2"><li><p>组件集成方式</p> <ul><li><p>实现dao层实现daoImpl，组件主动调用业务系统daoImpl</p></li> <li><p>通过@Component的value区分组件接口dao调用的实现类（daoImpl）,以被举报人为例：</p> <details><summary>pom</summary> <div class="language-xml extra-class"><pre class="language-xml"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">&gt;</span></span>com.thunisoft.jcw<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">&gt;</span></span>xsdj<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">&gt;</span></span>0.0.1-SNAPSHOT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div></details> <details><summary>spring boot启动类配置</summary> <div class="language-java extra-class"><pre class="language-java"><code><span class="token annotation punctuation">@ComponentScan</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">&quot;com.thunisoft.jcw.xsdj&quot;</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token annotation punctuation">@MapperScan</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token string">&quot;com.thunisoft.jcw.xsdj.mapper&quot;</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ApiApplication</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">SpringApplication</span><span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token class-name">ApiApplication</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre></div></details> <details><summary>daoImpl实现</summary> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>thunisoft<span class="token punctuation">.</span>zhba<span class="token punctuation">.</span>api<span class="token punctuation">.</span>pzxt<span class="token punctuation">.</span>dao<span class="token punctuation">.</span>impl</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util</span><span class="token punctuation">.</span><span class="token class-name">List</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>beans<span class="token punctuation">.</span>factory<span class="token punctuation">.</span>annotation</span><span class="token punctuation">.</span><span class="token class-name">Autowired</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>stereotype</span><span class="token punctuation">.</span><span class="token class-name">Component</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>thunisoft<span class="token punctuation">.</span>jcw<span class="token punctuation">.</span>xsdj<span class="token punctuation">.</span>dao</span><span class="token punctuation">.</span><span class="token class-name">IBjbrDao</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>thunisoft<span class="token punctuation">.</span>jcw<span class="token punctuation">.</span>xsdj<span class="token punctuation">.</span>model</span><span class="token punctuation">.</span><span class="token class-name">TBjbr</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> lombok<span class="token punctuation">.</span><span class="token class-name">RequiredArgsConstructor</span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
+* @author sunwenhao
+* @date 2019/12/27 17:57
+*/</span>
+<span class="token annotation punctuation">@Component</span><span class="token punctuation">(</span><span class="token string">&quot;thhxbjbr-bjbr&quot;</span><span class="token punctuation">)</span>
+<span class="token annotation punctuation">@RequiredArgsConstructor</span><span class="token punctuation">(</span>onConstructor_ <span class="token operator">=</span> <span class="token annotation punctuation">@Autowired</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ThhxbjbrDaoImpl</span> <span class="token keyword">implements</span> <span class="token class-name">IBjbrDao</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">deleteBjbrByBjbrbh</span><span class="token punctuation">(</span><span class="token class-name">String</span> bjbrbh<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">insert</span><span class="token punctuation">(</span><span class="token class-name">TBjbr</span> object<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">updateWithoutCond</span><span class="token punctuation">(</span><span class="token class-name">TBjbr</span> object<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">TBjbr</span><span class="token punctuation">&gt;</span></span> <span class="token function">query</span><span class="token punctuation">(</span><span class="token class-name">TBjbr</span> object<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div></details></li> <li><p>@Component的value值：</p> <div class="language- extra-class"><pre><code>  1.value分为tag-bjbr、tag-fyr、tag-jtcy、tag-lcrz、tag-wjwf、tag-wtxs、tag-xszy
+  2.业务系统tag区分方式：
+      谈话函询：thhx
+      初步核实：cbhs
+      立案审查：lasc
+      案件审理：ajsl
+          审理结论上传附件业务编号：              sljl
+          基本信息上传附件业务编号：              jbxx
+          问责基本信息上传附件业务编号：          wzjbxx
+          会议记录弹窗上传附件业务编号：          hyjl
+          结案登记上传附件业务编号：              jadj
+          退回补充审查调查上传附件业务编号：      thbcscdc
+          历史退回记录上传附件业务编号：          lsthjl
+          司法跟踪上传附件业务编号：              sfgz
+          审核把关反馈结果上传附件业务编号：      fkjg
+          申诉复查情况上传附件业务编号：          ssfc
+          商请检查机关提前介入上传附件业务编号：  sqjcjgtqjr
+          延长审理时限上传附件业务编号：          ycslsx
+          移送司法上传附件业务编号：              yssf
+  3.附件tag区分：
+      共用：zjjd
+      登记立案：lasc
+  由于全页面复用只涉及“登记立案模块”，故被调查人的tag用lasc，其他阶段bjbr模块级复用，用不同tag区分开
+</code></pre></div></li> <li><p>zjjd的dao层处理</p> <p>依据数据库表结构生成bean、mapper.java、mapper.xml、basemapper.xml，通过别名方式，与同名文件区分</p></li></ul></li></ol></li> <li><p>单值代码梳理</p> <details><summary>直接修改</summary> <table><thead><tr><th>单值代码含义</th> <th>单值代码id</th></tr></thead> <tbody><tr><td>对象类型</td> <td>45000216</td></tr> <tr><td>职级</td> <td>45000358</td></tr> <tr><td>其他身份（新增）</td> <td>45000863</td></tr> <tr><td>中共党代表级别（新增）</td> <td>45000860</td></tr> <tr><td>党委委员级别（替换）</td> <td>45000472</td></tr> <tr><td>纪委委员级别（新增）</td> <td>45000861</td></tr> <tr><td>家庭成员关系（新增）</td> <td>45000864</td></tr> <tr><td>密级（新增）</td> <td>45000865</td></tr> <tr><td>问题线索来源二</td> <td>45000859</td></tr></tbody></table></details> <details><summary>需要做映射</summary> <table><thead><tr><th>单值代码含义</th> <th>单值代码id</th></tr></thead> <tbody></tbody></table></details></li> <li><p>dao层设计</p> <p>由于zjjdApi中原bean字段不符合驼峰规范，为了保持和组件页面一致，减少修改工作量，故在com.thunisoft.zhba.api.pzxt路径下，构建字段符合驼峰格式的bean和mapper。</p></li> <li><p>登记立案</p> <div class="language- extra-class"><pre><code>  1.复用组件页面（全页面）
+  2.优先保障流程，详情暂不考虑
+</code></pre></div></li> <li><p>被举报人/被反映人</p> <div class="language- extra-class"><pre><code>  1.每个阶段bjbr对应一个daoImpl
+  2.mapper要做对应修改（原因：业务系统流转需拷贝）
+</code></pre></div></li> <li><p>举报人/反映人</p></li> <li><p>违纪违法模块</p> <div class="language- extra-class"><pre><code>  1.多选字段业务系统需要做处理，如二级分类</code></pre></div></li></ul></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.f21cdc56.js" defer></script><script src="/assets/js/2.9f03f641.js" defer></script><script src="/assets/js/12.e61c4ca7.js" defer></script>
+  </body>
+</html>

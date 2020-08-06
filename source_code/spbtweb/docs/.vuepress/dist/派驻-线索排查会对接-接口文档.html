@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>排查会接口文档 | VuePress</title>
+    <meta name="generator" content="VuePress 1.5.3">
+    
+    <meta name="description" content="the new world">
+    <link rel="preload" href="/assets/css/0.styles.93986fde.css" as="style"><link rel="preload" href="/assets/js/app.f21cdc56.js" as="script"><link rel="preload" href="/assets/js/2.9f03f641.js" as="script"><link rel="preload" href="/assets/js/6.cf5042a3.js" as="script"><link rel="prefetch" href="/assets/js/10.c680aa57.js"><link rel="prefetch" href="/assets/js/11.0f25b5a9.js"><link rel="prefetch" href="/assets/js/12.e61c4ca7.js"><link rel="prefetch" href="/assets/js/3.afe6d1cb.js"><link rel="prefetch" href="/assets/js/4.c57904d7.js"><link rel="prefetch" href="/assets/js/5.c57eb98c.js"><link rel="prefetch" href="/assets/js/7.2342caa0.js"><link rel="prefetch" href="/assets/js/8.90d61c22.js"><link rel="prefetch" href="/assets/js/9.27cb5384.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.93986fde.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">VuePress</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <!----> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="排查会接口文档"><a href="#排查会接口文档" class="header-anchor">#</a> 排查会接口文档</h1> <h2 id="目录"><a href="#目录" class="header-anchor">#</a> 目录</h2> <ul><li><a href="#%E5%A4%96%E9%83%A8%E6%8F%90%E4%BE%9B%E6%8E%A5%E5%8F%A3">外部提供接口</a></li> <li><a href="#%E5%AF%B9%E5%A4%96%E6%8F%90%E4%BE%9B%E6%8E%A5%E5%8F%A3">对外提供接口</a></li></ul> <h2 id="外部提供接口"><a href="#外部提供接口" class="header-anchor">#</a> 外部提供接口</h2> <ol><li><p>添加未上会线索查询接口</p> <div class="language- extra-class"><pre><code> POST:http://ip:port/api/pchjs/selectDtjXsInfo
+</code></pre></div><p>支持自定义查询</p> <details><summary>请求体</summary> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+    <span class="token property">&quot;cBjbr&quot;</span><span class="token operator">:</span><span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;cZj&quot;</span><span class="token operator">:</span><span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;cDw&quot;</span><span class="token operator">:</span><span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;deptid&quot;</span><span class="token operator">:</span><span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;xspchid&quot;</span><span class="token operator">:</span><span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;qp&quot;</span><span class="token operator">:</span><span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;cbr&quot;</span><span class="token operator">:</span><span class="token string">&quot;&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div></details> <details><summary>响应体</summary> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+    <span class="token property">&quot;code&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;data&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;total&quot;</span><span class="token operator">:</span> <span class="token number">16</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;data&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">&quot;cCzly&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;cBh&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1468EDF04F813CE6683A4E6EFFB479EF&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;arrXsly&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;cFyzywt&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;cCbr&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1915582441&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;cAjbs&quot;</span><span class="token operator">:</span> <span class="token string">&quot;bfc7014e211270bef               &quot;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">&quot;cCzly&quot;</span><span class="token operator">:</span> <span class="token string">&quot;aaaaaaa&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;cBh&quot;</span><span class="token operator">:</span> <span class="token string">&quot;CB36B03B307045B2AD26E73F56A684C3&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;cBjbr&quot;</span><span class="token operator">:</span> <span class="token string">&quot;aaaaaaaaa&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;cCzjy&quot;</span><span class="token operator">:</span> <span class="token string">&quot;立案审查调查&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;arrXsly&quot;</span><span class="token operator">:</span> <span class="token string">&quot;审查调查中发现&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;cFyzywt&quot;</span><span class="token operator">:</span> <span class="token string">&quot;aaaaaaaaaaaaaaa&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;cAjbs&quot;</span><span class="token operator">:</span> <span class="token string">&quot;31653c7cd033d50589ce01313441774d&quot;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;offset&quot;</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;limit&quot;</span><span class="token operator">:</span> <span class="token number">10</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;customData&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;message&quot;</span><span class="token operator">:</span> <span class="token string">&quot;成功&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div></details></li> <li><p>排查会请求推送上会线索</p> <div class="language- extra-class"><pre><code> POST:http://ip:port/api/pchjs/updateXsInfoList
+</code></pre></div> <details><summary>请求体</summary> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+    <span class="token property">&quot;shxsList&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+        <span class="token property">&quot;arrXsly&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token string">&quot;信访举报&quot;</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cAjbs&quot;</span><span class="token operator">:</span> <span class="token string">&quot;8B59C792DC6249358D37F5C3AE2121C9&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cBh&quot;</span><span class="token operator">:</span> <span class="token string">&quot;D887AA1924084CFD944BD50A0681C718&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cBjbr&quot;</span><span class="token operator">:</span> <span class="token string">&quot;家务伶伶&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cCbr&quot;</span><span class="token operator">:</span> <span class="token string">&quot;驻省委办公厅办案人员2&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cCzjy&quot;</span><span class="token operator">:</span> <span class="token string">&quot;转办&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cCzly&quot;</span><span class="token operator">:</span> <span class="token string">&quot;发发发&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cDw&quot;</span><span class="token operator">:</span> <span class="token string">&quot;华北电力测试&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cFyzywt&quot;</span><span class="token operator">:</span> <span class="token string">&quot;失职渎职&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cXspchBh&quot;</span><span class="token operator">:</span> <span class="token string">&quot;a2978e7686aa0a47feadb6a0e9397155&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cZj&quot;</span><span class="token operator">:</span> <span class="token string">&quot;正局级&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cZw&quot;</span><span class="token operator">:</span> <span class="token string">&quot;某室主任&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;fetchFields&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+        <span class="token property">&quot;arrXsly&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token string">&quot;监督检查中发现&quot;</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cAjbs&quot;</span><span class="token operator">:</span> <span class="token string">&quot;4028717811BE6FB7DD1BC376A28DDACB&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cBh&quot;</span><span class="token operator">:</span> <span class="token string">&quot;DB5DB0F9B266DD7C1650CB8E093F3E4C&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cBjbr&quot;</span><span class="token operator">:</span> <span class="token string">&quot;水电费&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cCbr&quot;</span><span class="token operator">:</span> <span class="token string">&quot;驻省委办公厅组长&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cCzly&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cDw&quot;</span><span class="token operator">:</span> <span class="token string">&quot;士大夫&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cFyzywt&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cXspchBh&quot;</span><span class="token operator">:</span> <span class="token string">&quot;a2978e7686aa0a47feadb6a0e9397155&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cZj&quot;</span><span class="token operator">:</span> <span class="token string">&quot;副局级&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cZw&quot;</span><span class="token operator">:</span> <span class="token string">&quot;上dfa&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;fetchFields&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre></div></details> <details><summary>响应体</summary> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+    <span class="token property">&quot;success&quot;</span><span class="token operator">:</span> <span class="token string">&quot;成功&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;message&quot;</span><span class="token operator">:</span> <span class="token string">&quot;200&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div></details></li> <li><p>删除已添加的上会线索</p> <p>该功能为写待定义</p></li> <li><p>获取人员在办问题线索数</p> <p>原调用zjjdApi中的接口</p> <div class="language- extra-class"><pre><code> GET:http://ip:port/api/cbr/countzbjs
+</code></pre></div> <details><summary>请求体</summary> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+                <span class="token property">&quot;689754742&quot;</span><span class="token operator">:</span> <span class="token string">&quot;安徽省案件监督承办人01&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;689764073&quot;</span><span class="token operator">:</span> <span class="token string">&quot;安徽省案件监督承办人02&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;689770012&quot;</span><span class="token operator">:</span> <span class="token string">&quot;安徽省案件监督承办人03&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;1119307109&quot;</span><span class="token operator">:</span> <span class="token string">&quot;安徽案管室主任&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;1205183595&quot;</span><span class="token operator">:</span> <span class="token string">&quot;安徽案管线索管理员1&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;1205197887&quot;</span><span class="token operator">:</span> <span class="token string">&quot;安徽案管线索管理员2&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;34000009004&quot;</span><span class="token operator">:</span> <span class="token string">&quot;夏延生&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;34000009005&quot;</span><span class="token operator">:</span> <span class="token string">&quot;杜忠法&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;34000009002&quot;</span><span class="token operator">:</span> <span class="token string">&quot;王在胜&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;34000009003&quot;</span><span class="token operator">:</span> <span class="token string">&quot;楼伟成&quot;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div></details> <details><summary>响应体</summary> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+    <span class="token property">&quot;success&quot;</span><span class="token operator">:</span> <span class="token string">&quot;true&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;message&quot;</span><span class="token operator">:</span> <span class="token string">&quot;ok&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;data&quot;</span><span class="token operator">:</span><span class="token punctuation">{</span>
+        <span class="token property">&quot;1223234234&quot;</span><span class="token operator">:</span><span class="token string">&quot;120&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;1257676766&quot;</span><span class="token operator">:</span><span class="token string">&quot;100&quot;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div></details></li> <li><p>线索流转功能接口</p></li> <li><p>删除排查会，去除会上线索的上会标记</p></li></ol> <h2 id="对外提供接口"><a href="#对外提供接口" class="header-anchor">#</a> 对外提供接口</h2> <ol><li><p>接收推送的上会线索</p> <div class="language- extra-class"><pre><code> POST:http://ip:port/pz-xspch/api/xspch/jsShxs
+</code></pre></div> <details><summary>请求体</summary> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+        <span class="token property">&quot;bjbrList&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token property">&quot;cGzdw&quot;</span><span class="token operator">:</span> <span class="token string">&quot;华北电力测试&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;cSfdwhsjsg&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;cWtxszy&quot;</span><span class="token operator">:</span> <span class="token string">&quot;失职渎职&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;cXm&quot;</span><span class="token operator">:</span> <span class="token string">&quot;假时木蓉&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;cZj&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;cZw&quot;</span><span class="token operator">:</span> <span class="token string">&quot;某室主任&quot;</span>
+        <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cAjbs&quot;</span><span class="token operator">:</span> <span class="token string">&quot;5B12B80AB8EF43C49D15427CB1D2F412&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cAjly&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cBh&quot;</span><span class="token operator">:</span> <span class="token string">&quot;E59620246CCB45A99942D9263279A98E&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cCbbm&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1915247541&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cCbr&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1915568109&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cPchid&quot;</span><span class="token operator">:</span> <span class="token string">&quot;a2978e7686aa0a47feadb6a0e9397155&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cXsh&quot;</span><span class="token operator">:</span> <span class="token string">&quot;100201906318&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;dZhgxSj&quot;</span><span class="token operator">:</span> <span class="token number">1574391271229</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;lcWtxsbz&quot;</span><span class="token operator">:</span> <span class="token string">&quot;ENCRYPT#spQxck7kjFjyDWAe/VGTQw==&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+        <span class="token property">&quot;bjbrList&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token property">&quot;cSfdwhsjsg&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;cWtxszy&quot;</span><span class="token operator">:</span> <span class="token string">&quot;少时诵诗书所&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;cXm&quot;</span><span class="token operator">:</span> <span class="token string">&quot;嗯嗯翁无&quot;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+            <span class="token property">&quot;cGzdw&quot;</span><span class="token operator">:</span> <span class="token string">&quot;少时诵诗书所&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;cSfdwhsjsg&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;cWtxszy&quot;</span><span class="token operator">:</span> <span class="token string">&quot;少时诵诗书所所所&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;cXm&quot;</span><span class="token operator">:</span> <span class="token string">&quot;33333333&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;cZw&quot;</span><span class="token operator">:</span> <span class="token string">&quot;是啥&quot;</span>
+        <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cAjbs&quot;</span><span class="token operator">:</span> <span class="token string">&quot;5538c72f9d10fa0ad518b2df39729c4f&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cAjly&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cBh&quot;</span><span class="token operator">:</span> <span class="token string">&quot;E91CEC6F38314C0E87081F5B532E529C&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cCbbm&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1915247541&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cCbr&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cCzjy&quot;</span><span class="token operator">:</span> <span class="token string">&quot;7&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cCzly&quot;</span><span class="token operator">:</span> <span class="token string">&quot;一样一样&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cJyBlfs&quot;</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cPchid&quot;</span><span class="token operator">:</span> <span class="token string">&quot;a2978e7686aa0a47feadb6a0e9397155&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cXsh&quot;</span><span class="token operator">:</span> <span class="token string">&quot;100201906327&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;dZhgxSj&quot;</span><span class="token operator">:</span> <span class="token number">1574391271229</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;lcWtxsbz&quot;</span><span class="token operator">:</span> <span class="token string">&quot;ENCRYPT#xBYkWqxrLbWntE7LkIHBZmJdbNMQsYRx,ENCRYPT#xBYkWqxrLbWntE7LkIHBZoXnrN9QoD/AYAAs0o5swzE=&quot;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div></details> <details><summary>响应体</summary> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+    <span class="token property">&quot;code&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;data&quot;</span><span class="token operator">:</span> <span class="token string">&quot;succeed&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;message&quot;</span><span class="token operator">:</span> <span class="token string">&quot;成功&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div></details></li> <li><p>排查会上会线索更新——处置时线索选择、切换会议</p> <div class="language- extra-class"><pre><code> PATCH:http://ip:port/pz-xspch/api/xspch/updateShxsxx
+</code></pre></div><p>调用场景：</p> <div class="language- extra-class"><pre><code> 1.处置模块选择上会
+ 2.处置模块，上会线索更换排查会
+</code></pre></div><blockquote><p>有上会线索即更新，无则插入</p></blockquote> <details><summary>请求体</summary>
+ TPchShxs.java
+<div class="language-java extra-class"><pre class="language-java"><code>
+</code></pre></div></details></li> <li><p>处置拉取线索可选上会的会议接口</p> <div class="language- extra-class"><pre><code> GET:http://ip:port/pz-xspch/api/xspch/pchxx/{cbbm}
+</code></pre></div><table><thead><tr><th>请求参数</th> <th>参数说明</th></tr></thead> <tbody><tr><td>cbbm</td> <td>承办部门</td></tr></tbody></table> <details><summary>响应体</summary> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+        <span class="token property">&quot;cBh&quot;</span><span class="token operator">:</span> <span class="token string">&quot;9390691e8a8512bc8523e45e389637dc&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cHydd&quot;</span><span class="token operator">:</span> <span class="token string">&quot;会议地点&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cHymc&quot;</span><span class="token operator">:</span> <span class="token string">&quot;张华清合肥线索排查会&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cHyzt&quot;</span><span class="token operator">:</span> <span class="token string">&quot;4&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;dHysj&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-08-29T00:00:00&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;fetchFields&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+        <span class="token property">&quot;cBh&quot;</span><span class="token operator">:</span> <span class="token string">&quot;63e3491333176d887654d5f5d3ab66a2&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cBz&quot;</span><span class="token operator">:</span> <span class="token string">&quot;发&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cHydd&quot;</span><span class="token operator">:</span> <span class="token string">&quot;会议地点1&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cHymc&quot;</span><span class="token operator">:</span> <span class="token string">&quot;排查会验证1&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cHyzt&quot;</span><span class="token operator">:</span> <span class="token string">&quot;4&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;dHysj&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-08-15T00:00:00&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;fetchFields&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+        <span class="token property">&quot;cBh&quot;</span><span class="token operator">:</span> <span class="token string">&quot;d2a8fc6e10b89b92f339f3eb3c268c4c&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cBz&quot;</span><span class="token operator">:</span> <span class="token string">&quot;修改&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cHydd&quot;</span><span class="token operator">:</span> <span class="token string">&quot;清凉山&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cHymc&quot;</span><span class="token operator">:</span> <span class="token string">&quot;张华卿测试&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cHyzt&quot;</span><span class="token operator">:</span> <span class="token string">&quot;4&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;dHysj&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-08-10T00:00:00&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;fetchFields&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+        <span class="token property">&quot;cBh&quot;</span><span class="token operator">:</span> <span class="token string">&quot;9C32F2465E8746A49A77835BC3203F85&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cBz&quot;</span><span class="token operator">:</span> <span class="token string">&quot;123&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cHydd&quot;</span><span class="token operator">:</span> <span class="token string">&quot;紫金山&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cHymc&quot;</span><span class="token operator">:</span> <span class="token string">&quot;张华卿测试2&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;cHyzt&quot;</span><span class="token operator">:</span> <span class="token string">&quot;5&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;dHysj&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-07-30T00:00:00&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;fetchFields&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div></details></li> <li><p>批量接收上会线索接口</p> <div class="language- extra-class"><pre><code> POST:http://ip:port/xspch/blym/addBatch/{pchbh}
+</code></pre></div><table><thead><tr><th>请求参数</th> <th>参数说明</th></tr></thead> <tbody><tr><td>pchbh</td> <td>排查会编号</td></tr></tbody></table> <details><summary>请求体</summary>
+ List<TPchShxs>
+ ```json
+<div class="language- extra-class"><pre class="language-text"><code>&lt;/details&gt;</code></pre></div></TPchShxs></details></li></ol></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.f21cdc56.js" defer></script><script src="/assets/js/2.9f03f641.js" defer></script><script src="/assets/js/6.cf5042a3.js" defer></script>
+  </body>
+</html>

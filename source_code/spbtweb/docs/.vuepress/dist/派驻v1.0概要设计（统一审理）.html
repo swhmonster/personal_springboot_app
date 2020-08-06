@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>派驻v1.0概要设计 | VuePress</title>
+    <meta name="generator" content="VuePress 1.5.3">
+    
+    <meta name="description" content="the new world">
+    <link rel="preload" href="/assets/css/0.styles.93986fde.css" as="style"><link rel="preload" href="/assets/js/app.f21cdc56.js" as="script"><link rel="preload" href="/assets/js/2.9f03f641.js" as="script"><link rel="preload" href="/assets/js/10.c680aa57.js" as="script"><link rel="prefetch" href="/assets/js/11.0f25b5a9.js"><link rel="prefetch" href="/assets/js/12.e61c4ca7.js"><link rel="prefetch" href="/assets/js/3.afe6d1cb.js"><link rel="prefetch" href="/assets/js/4.c57904d7.js"><link rel="prefetch" href="/assets/js/5.c57eb98c.js"><link rel="prefetch" href="/assets/js/6.cf5042a3.js"><link rel="prefetch" href="/assets/js/7.2342caa0.js"><link rel="prefetch" href="/assets/js/8.90d61c22.js"><link rel="prefetch" href="/assets/js/9.27cb5384.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.93986fde.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">VuePress</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <!----> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="派驻v1-0概要设计"><a href="#派驻v1-0概要设计" class="header-anchor">#</a> <strong>派驻v1.0概要设计</strong></h1> <blockquote><p>author : 孙文浩</p></blockquote> <blockquote><p>version : v1.0</p></blockquote> <blockquote><p>date : 2020-3</p></blockquote> <hr> <h2 id="目录"><a href="#目录" class="header-anchor">#</a> 目录</h2> <ul><li><a href="#1.%E7%B3%BB%E7%BB%9F%E6%B5%81%E7%A8%8B%E6%A6%82%E8%BF%B0">1.系统流程概述</a> <ul><li><a href="#1.1.%E7%9B%B8%E5%85%B3%E4%B8%9A%E5%8A%A1%E6%A8%A1%E5%9D%97">1.1.相关业务模块</a></li> <li><a href="#1.2.%E6%95%B0%E6%8D%AE%E6%B5%81%E7%A8%8B">1.2.数据流程</a></li> <li><a href="#1.3.%E6%95%B0%E6%8D%AE%E6%9D%83%E9%99%90">1.3.数据权限</a></li> <li><a href="#1.4.%E5%8A%9F%E8%83%BD%E6%9D%83%E9%99%90">1.4.功能权限</a></li></ul></li> <li><a href="#2.%E5%8A%9F%E8%83%BD%E6%A8%A1%E5%9D%97%E5%88%92%E5%88%86">2.功能模块划分</a> <ul><li><a href="#2.1.A5%E9%83%A8%E5%88%86">2.1.A5部分</a></li> <li><a href="#2.2.A6%E9%83%A8%E5%88%86">2.2.A6部分</a></li></ul></li> <li><a href="#3.%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1">3.数据库设计</a> <ul><li><a href="#3.1.DDL">3.1.DDL</a></li> <li><a href="#3.2.DML">3.2.DML</a></li></ul></li> <li><a href="#4.%E9%99%84%E5%BD%95">4.附录</a></li></ul> <hr> <h2 id="_1-系统流程概述"><a href="#_1-系统流程概述" class="header-anchor">#</a> 1.系统流程概述</h2> <h3 id="_1-1-相关业务模块"><a href="#_1-1-相关业务模块" class="header-anchor">#</a> 1.1.相关业务模块</h3> <ul><li>立案审查调查</li> <li>内部审理</li> <li>统一审理</li></ul> <h3 id="_1-2-数据流程"><a href="#_1-2-数据流程" class="header-anchor">#</a> 1.2.数据流程</h3> <div class="language-mermaid extra-class"><pre class="language-text"><code>sequenceDiagram
+participant scdc as 审查调查
+participant nbsl as 内部审理
+participant tysl as 统一审理
+scdc-&gt;&gt;nbsl:形式审查接收
+Note over scdc,nbsl:内部审理-&gt;待受理-&gt;进行审理
+nbsl--&gt;&gt;scdc:退回补充/重新审查调查
+Note over scdc,nbsl:审查调查-&gt;退回补充/重新审查调查
+Note over scdc,nbsl:内部审理-&gt;补充/重新审查调查
+scdc-&gt;&gt;nbsl:重新移送
+Note over scdc,nbsl:内部审理-&gt;补充/重新审查调查
+nbsl-&gt;&gt;nbsl:不需要移送，案件结案
+nbsl-&gt;&gt;tysl:需要移送，移送省直纪工委
+Note over nbsl,tysl:统一审理-&gt;形审-&gt;受理-&gt;办理
+tysl--&gt;&gt;nbsl:退回补充/重新审查调查
+Note over tysl,nbsl:内部审理-&gt;统一审理
+Note over nbsl,scdc:审查调查-&gt;退回补充/重新审查调查
+nbsl--&gt;&gt;scdc:退回补充/重新审查调查
+Note over tysl,scdc:需要一级级移送回审查调查，内部审理-&gt;补充/重新审查调查
+tysl--Xscdc:退回补充/重新审查调查
+nbsl-&gt;&gt;tysl:重新移送
+tysl-&gt;&gt;tysl:统一审理，给出结论
+tysl-&gt;&gt;nbsl:统一审理结束
+nbsl-&gt;&gt;nbsl:继续办理，案件结案
+</code></pre></div><h3 id="_1-3-数据权限"><a href="#_1-3-数据权限" class="header-anchor">#</a> 1.3.数据权限</h3> <blockquote><p>基于派驻已有数据权限，此节点只描述内部审理与统一审理的数据权限区分</p></blockquote> <ul><li>内部审理数据权限
+<ul><li>原数据权限+（移送省直纪工委标识）</li></ul></li> <li>统一审理数据权限
+<ul><li>借用内部审理数据权限+（移送省直纪工委标识）</li> <li>主页面sql参照权限字修改，基于原内部审理sql修改</li></ul></li> <li>标识字段解释
+<ul><li>c_sfys:是否移送
+<ul><li>1：是，需要移送</li> <li>2：否，不需要移送</li></ul></li> <li>c_tyslzt：统一审理状态
+<ul><li>0：统一审理待接收</li> <li>1：统一审理中</li> <li>2：统一审理退回(补充/重新)</li> <li>3：统一审理形审退回</li> <li>4：统一审理完成</li> <li>5：统一审理待受理</li> <li>6：统一审理待分配承办人</li> <li>7：内部审理退回(补充/重新)</li> <li>8：立案审查销案</li> <li>11：结案</li> <li>12：内部审理补充/重新审查重新移送</li> <li>13：审查调查补充/重新审查重新移送</li> <li>14：终止</li> <li>15：重新审查调查重新移送</li> <li>16：内部审理重新审查调查重新移送</li></ul></li></ul></li></ul> <hr> <h3 id="_1-4-功能权限"><a href="#_1-4-功能权限" class="header-anchor">#</a> 1.4.功能权限</h3> <ul><li>内部审理保持不变</li> <li>统一审理参照权限字梳理文档，在dev_tools上配置对应权限字</li></ul> <h2 id="_2-功能模块划分"><a href="#_2-功能模块划分" class="header-anchor">#</a> 2.功能模块划分</h2> <h3 id="_2-1-a5部分"><a href="#_2-1-a5部分" class="header-anchor">#</a> 2.1.A5部分</h3> <ul><li><strong>主界面构建</strong> <ul><li><p>分配承办人</p> <ul><li>承办人办案表增加字段“是否统一审理分配”c_sftyslfp，一个案件审理记录，在统一审理退回时，需要退回内部审理原承办人，这时需要区分统一审理分配的承办人和内部审理分配的承办人</li></ul></li> <li><p>t_zhbaz_zjmpz_ajlb（已配置好，需修改链接页面）</p> <ul><li>已配置的c_url链接页面，替换成新的ajxs表中的新记录，新记录基于内部审理原记录改造</li></ul></li> <li><p>t_zhba_zjmpz_ajxs</p> <ul><li>针对同一审理，copy一份内部审理的配置，挂接ajlb表配置，具体查询逻辑，依据具体模块改造（增加查询过滤条件）</li></ul></li></ul></li> <li><strong>审查调查</strong> <ul><li>前提条件：移送过了统一审理，销案时，需要在原有更新操作中，增加c_tyslzt=8的更新</li> <li>前提条件：移送过了统一审理，结案时，需要在原有更新操作中，增加c_tyslzt=11的更新</li> <li>统一-&gt;内部-&gt;审查调查重新移送，更新c_tyslzt=13</li></ul></li> <li><strong>内部审理</strong> <ul><li>形式审查
+<ul><li>列表数据查询暂无修改</li> <li>形式审查保存增加c_xssclx=1</li></ul></li> <li>进行审理
+<ul><li>审理中案件
+<ol><li>列表查询条件增加条件字段，c_tyslzt=null</li> <li>审批记录，参照t_zhba_sp表，审批详情参考表中审批详情字段（需新增c_spxqurl）</li></ol></li> <li>补充/重新调查
+<ol><li>列表数据查询暂无修改</li> <li>办理操作同审理中案件</li> <li>原退回逻辑不变，省直纪工委退回的数据增加查询条件 or c_tyslzt=13</li></ol></li> <li>申请复查案件
+<ol><li>隐藏模块，暂不做</li></ol></li> <li>统一审理
+<ol><li>查询sql参考审理中案件tab，c_tyslzt in (1,2,3,4)</li> <li>状态列参照c_tyslzt</li></ol></li></ul></li> <li>已结案
+<ul><li>查询增加标识字段作为条件，or c_tyslzt=11</li></ul></li> <li>立案审查调查已终止/销案
+<ul><li>查询增加标识字段作为条件，or c_tyslzt=8</li></ul></li></ul></li> <li><strong>统一审理</strong> <ul><li><p>形式审查</p> <ul><li>形式审查
+<ol><li>形式审查通过，审批通过，ajsl.c_tyslzt=1，sp.c_dqzt=2</li> <li>形式审查通过，审批不通过，sp.c_dqzt=3</li> <li>形式审查不通过，审批通过，ajls.c_tyslzt=3,sp.c_dqzt=2</li> <li>形式审查不通过，审批不通过，sp.c_dqzt=3</li> <li>更新t_zhba_ajsl_xsjl.c_xssclx=2</li></ol></li> <li>形式审查审批：
+<ol><li>受理案件形式审核表，约定“勾选项字段”，在attachmenturl中带入数据（目前可能无数据）</li></ol></li> <li>审批记录
+<ol><li>审批详情，直接调用数据库审批表中的详情字段c_spxqurl</li> <li>审批状态，对接审批mq更新进库中的状态，参照数据库单值代码</li></ol></li></ul></li> <li><p>案件受理</p> <ul><li>审批记录
+<ol><li>参照t_zhba_sp表，详情参考表中字段</li> <li>增加案件受理表t_zhba_ajsl_ajsl，用于审批记录查询</li></ol></li> <li>受理操作，更新c_tyslzt=5,c_ajjd</li> <li>再次受理，即审批退回，列表展示依据审批状态，该操作为再次提起审批</li> <li>列表状态列，参照需求中梳理的状态（该状态建立在审批状态上）</li> <li>受理审批通过后，更新c_tyslzt=6，展示分配承办人</li> <li>分配承办人后，更新c_tyslzt=1</li></ul></li> <li><p>进行审理</p> <ul><li>审理中案件
+<ol><li>列表数据查询增加条件字段c_tyslzt=1</li> <li>审批状态，对接审批mq更新进库中的状态，参照数据库单值代码</li></ol></li> <li>补充/重新调查
+<ol><li>查询条件，c_tyslzt=2 or c_tyslzt=12</li></ol></li> <li>申诉复查
+<ol><li>隐藏暂不做</li></ol></li></ul></li> <li><p>已结案</p> <ul><li>结案
+<ol><li>结案列表查询条件增加（c_sfys=1 and c_tyslzt=11）</li></ol></li> <li>统一审理结束
+<ol><li>查询关注c_tyslzt=4</li></ol></li> <li>立案审查调查已终止/销案
+<ol><li>关注c_tyslzt=8</li></ol></li></ul></li></ul></li> <li><strong>提前介入</strong> <ul><li>介入申请批准
+<ul><li>增加内部审理省直纪工委提前介入的数据来源查询，依旧按照原来数据权限，通过部门区分</li></ul></li> <li>指定审理组
+<ul><li>增加内部审理省直纪工委提前介入的数据来源查询，依旧按照原来数据权限，通过部门区分</li></ul></li> <li>反馈结果
+<ul><li>增加内部审理省直纪工委提前介入的数据来源查询，依旧按照原来数据权限，通过部门区分</li></ul></li></ul></li> <li><strong>审批相关</strong> <ul><li>zjjdApi同步审批数据时，增加c_spxqurl的保存，该字段存在于审批mq消息中</li> <li>退回补充审查调查的审批，放在文书上审批（变为文书审批），审批bk区分“补充”和“重新”</li> <li>全局问题：审批区分派驻部门和省直纪工委，通过uim权限字控制所要走的审批流程
+<ul><li><p>区分2级还是3级：</p> <div class="language- extra-class"><pre><code>  sfzcbr(是否主承办人，来自t_zhba_cbr_ba):
+  1：是
+  2：否
+</code></pre></div></li> <li><p>区分派驻部门和省直纪工委</p> <div class="language- extra-class"><pre><code>  sfszjgw(权限字，是否省直纪工委):
+    省直纪工委审批流程：1(jcw.pzxt.sp.szjgw)
+    派驻部门审批流程：2(jcw.pzxt.sp.pzbm)
+</code></pre></div></li> <li><p>增加方式</p> <div class="language- extra-class"><pre><code>attachmenturl中，增加groupCondition：{&quot;sfzcbr&quot;:&quot;1&quot;,&quot;qxkey&quot;:&quot;1&quot;}
+</code></pre></div></li> <li><p>区分文书审批还是事项审批：<br>
+business_key 中：<br>
+以&quot;pzws&quot;开头的为文书审批<br>
+以&quot;pzsx&quot;开头的为事项审批</p></li> <li><p>提请审批的修改</p> <ol><li>审批记录查询相关，提请审批时dataId=ywbh;ajbh</li> <li>同步审批记录时，解析dataId，ywbh存c_tqnr，ajbh存c_ajbh</li></ol></li></ul></li></ul></li> <li><strong>数据流转</strong> <ul><li>数据流传节点参考流程图</li> <li>流转时的字段更新，参考已梳理的页面查询</li></ul></li></ul> <h3 id="_2-1-a6部分"><a href="#_2-1-a6部分" class="header-anchor">#</a> 2.1.A6部分</h3> <blockquote><p>前端定义接口，后端对应字段。见<a href="#4.%E9%99%84%E5%BD%95">4.附录</a></p></blockquote> <ul><li>区分“内部审理办理页面”和“统一审理办理页面”方式
+<ul><li>通过dkfs
+<ul><li>dkfs=1:内部审理打开办理页面，下面两字段为主表字段（即基本信息字段）
+<ol><li>c_sfys=null or 2,c_tyslzt=null，左侧展示11个节点(3+8)</li> <li>c_sfys=1,c_tyslzt=-1,2,3,13，左侧展示9个节点</li> <li>c_sfys=1,c_tyslzt=4,左侧展示14个节点</li></ol></li> <li>dkfs=2:统一审理打开办理页面
+<ol><li>左侧展示6个节点</li></ol></li></ul></li></ul></li> <li>接口定义：
+<ul><li>前端根据页面操作定义接口+字段中文含义</li> <li>后端根据字段中文含义，对上后台英文字段</li></ul></li> <li>左侧节点在内部审理和统一审理的可选范围区分方式
+<ul><li>根据c_sfys字段段
+<ul><li>1：移送</li> <li>2：不移送</li></ul></li></ul></li> <li>模块功能梳理（具体操作已前端定义的接口为准），此处指出修改节点
+<ul><li><p>基本信息</p> <ul><li>增加字段是否移送省直纪工委c_sfys</li></ul></li> <li><p>审理谈话</p> <ul><li>页面调整</li> <li>增加审批，dataId(c_tqnr)为行记录主键</li> <li>嵌入附件模块，以每条记录为单位，记录主键为嵌入附件url传参ywbh</li> <li>审批记录，参考数据库t_zhba_sp，详情用sp表中的c_spxqurl</li> <li>区分“派驻部门”和“省直纪工委”，审理谈话表增加字段c_sfys判断
+<ol><li>c_sfys:1,统一审理</li> <li>c_sfys:2,内部审理</li></ol></li></ul></li> <li><p>商请省直纪工委提前介入</p> <ul><li>前端新增页面</li> <li>后端新增接口</li> <li>数据库对应表结构，t_zhba_tqjr增加字段</li> <li>提前计入类型，单值代码维护</li></ul></li> <li><p>补充/重新审查</p> <ul><li>退回补充审查表增加c_sfys，用作区分“派驻部门”和“省直纪工委”的退回
+<ol><li>c_sfys:1,统一审理</li> <li>c_sfys:2,内部审理</li></ol></li> <li>文书</li></ul> <ol><li><p>内部审理：</p> <div class="language- extra-class"><pre><code>     原文书模板配置
+</code></pre></div></li> <li><p>统一审理</p> <div class="language- extra-class"><pre><code>     新增文书模板配置
+</code></pre></div></li></ol> <ul><li>退回阶段判断</li></ul> <ol><li><p>阶段参数解释</p> <div class="language- extra-class"><pre><code>   c_thlx=1:统一审理退回
+   c_thlx=2:内部审理退回
+</code></pre></div></li></ol> <ul><li>审批：</li></ul> <ol><li><p>内部审理：</p> <div class="language- extra-class"><pre><code>     补充审查调查pzws_nbsl_bcscdc
+     重新审查调查pzws_nbsl_cxscdc
+</code></pre></div></li> <li><p>统一审理</p> <div class="language- extra-class"><pre><code>     补充审查调查：pzws_tysl_bcscdc
+     重新审查调查：pzws_tysl_cxscdc
+</code></pre></div><ol start="3"><li>t_zhba_splc_config中配置（修改+新增）文书审批</li></ol></li></ol></li> <li><p>延长审理时限</p> <ul><li>数据区分“内部审理”和“统一审理”，通过c_sfys
+<ol><li>c_sfys:1,统一审理</li> <li>c_sfys:2,内部审理</li></ol></li> <li>页面重做</li> <li>后台接口重写</li> <li>嵌入附件模块，记录主键作为ywbh</li> <li>审批有相关校验</li> <li>延长次数做成配置，配置到application.yml中</li></ul></li> <li><p>审理结论</p> <ul><li>事项记录模块如果有，先隐藏</li></ul></li> <li><p>移送省直纪工委</p> <ul><li>此模块涉及数据流转，更新字段c_tyslzt=0</li> <li>关于留置措施的时间问题，需要对接dccs服务</li></ul></li></ul></li></ul> <hr> <h2 id="_3-数据库设计"><a href="#_3-数据库设计" class="header-anchor">#</a> 3.数据库设计</h2> <h3 id="_3-1-ddl"><a href="#_3-1-ddl" class="header-anchor">#</a> 3.1.DDL</h3> <blockquote><p>单值代码：vc100，正常string字段vc300、vc600、vc900，富文本（过长字符串）text</p></blockquote> <ul><li><p>表结构修改</p> <ul><li><p><strong>t_zhba_ajsl（已加）</strong></p> <table><thead><tr><th>column</th> <th>type</th> <th>comment</th></tr></thead> <tbody><tr><td>c_sfys</td> <td>varchar(100)</td> <td>是否移送</td></tr> <tr><td>c_tyslzt</td> <td>varchar(100)</td> <td>统一审理状态</td></tr> <tr><td>c_nbslxaqr</td> <td>varchar(100)</td> <td>内部审理销案确认</td></tr> <tr><td>c_tyslxaqr</td> <td>varchar(100)</td> <td>统一审理销案确认</td></tr> <tr><td>d_ystyslrq</td> <td>date</td> <td>移送统一审理日期</td></tr> <tr><td>lc_tysljlbz</td> <td>text</td> <td>统一审理结论备注</td></tr> <tr><td>d_tysljsrq</td> <td>date</td> <td>统一审理结束日期</td></tr> <tr><td>c_tyslbm</td> <td>varchar(300)</td> <td>统一审理部门</td></tr></tbody></table> <hr> <hr></li> <li><p><strong>t_zhba_sp（已加）</strong></p> <table><thead><tr><th>column</th> <th>type</th> <th>comment</th></tr></thead> <tbody><tr><td>c_spxqurl</td> <td>text</td> <td>审批详情url</td></tr></tbody></table> <hr> <hr></li> <li><p><strong>t_zhba_tqjr（已加）</strong></p> <table><thead><tr><th>column</th> <th>type</th> <th>comment</th></tr></thead> <tbody><tr><td>d_larq</td> <td>timestamp</td> <td>立案日期（冗余字段）</td></tr> <tr><td>c_xm</td> <td>varchar(300)</td> <td>被调查人姓名（冗余字段）</td></tr> <tr><td>d_csrq</td> <td>timestamp</td> <td>出生日期（冗余字段）</td></tr> <tr><td>c_gzdw</td> <td>varchar(300)</td> <td>工作单位（冗余字段）</td></tr> <tr><td>c_xzzw</td> <td>varchar(300)</td> <td>现职务（冗余字段）</td></tr> <tr><td>c_laay</td> <td>varchar(300)</td> <td>立案案由（冗余字段）</td></tr> <tr><td>c_sflz</td> <td>varchar(100)</td> <td>是否留置</td></tr> <tr><td>d_lzsj</td> <td>timestamp</td> <td>留置时间</td></tr> <tr><td>c_sfzjcj</td> <td>varchar(100)</td> <td>是否装订成卷</td></tr> <tr><td>c_ajsl</td> <td>varchar(300)</td> <td>案卷数量</td></tr> <tr><td>c_sfxcscdcbgcg</td> <td>varchar(100)</td> <td>是否形成审查调查报告初稿</td></tr> <tr><td>lc_zywjwfss</td> <td>text</td> <td>主要违纪违法事实</td></tr></tbody></table> <hr> <hr></li> <li><p><strong>t_zhba_ajsl_slth（已加）</strong></p> <table><thead><tr><th>column</th> <th>type</th> <th>comment</th></tr></thead> <tbody><tr><td>c_thlx</td> <td>varchar(100)</td> <td>谈话类型（1：统一 2：内部）</td></tr></tbody></table> <hr> <hr></li> <li><p><strong>t_zhba_thbcsc（已加）</strong></p> <table><thead><tr><th>column</th> <th>type</th> <th>comment</th></tr></thead> <tbody><tr><td>c_thlx</td> <td>varchar(100)</td> <td>退回类型</td></tr></tbody></table> <hr> <hr></li> <li><p><strong>t_zhba_ajsl_xsjl（已加）</strong></p> <table><thead><tr><th>column</th> <th>type</th> <th>comment</th></tr></thead> <tbody><tr><td>c_xssclx</td> <td>varchar(100)</td> <td>形式审查类型</td></tr></tbody></table></li> <li><p><strong>t_zhba_cbr_ba</strong></p> <table><thead><tr><th>column</th> <th>type</th> <th>comment</th></tr></thead> <tbody><tr><td>c_sftyslfp</td> <td>varchar(100)</td> <td>是否统一审理分配</td></tr></tbody></table></li> <li><p><strong>t_zhba_ycsx</strong></p> <table><thead><tr><th>column</th> <th>type</th> <th>comment</th></tr></thead> <tbody><tr><td>d_ybjrq</td> <td>timestamp</td> <td>原办结日期</td></tr> <tr><td>c_sllx</td> <td>varchar(100)</td> <td>审理类型</td></tr></tbody></table></li></ul></li> <li><p>新增表</p> <ul><li><strong>t_zhba_ajsl_ajsl</strong> <table><thead><tr><th>column</th> <th>type</th> <th>comment</th></tr></thead> <tbody><tr><td></td> <td></td> <td>主键</td></tr> <tr><td></td> <td></td> <td>案件编号</td></tr></tbody></table></li> <li><strong>t_zhba_ajsl_ysszjgw</strong> <table><thead><tr><th>column</th> <th>type</th> <th>comment</th></tr></thead> <tbody><tr><td>c_bh</td> <td>varchar(32)</td> <td>主键</td></tr> <tr><td>c_ajbh</td> <td>varchar(32)</td> <td>案件编号</td></tr> <tr><td>d_ystyslrq</td> <td>date</td> <td>移送统一审理日期</td></tr> <tr><td>c_czr</td> <td>varchar(300)</td> <td>操作人</td></tr> <tr><td>dt_cjsj</td> <td>timestamp</td> <td>创建时间</td></tr> <tr><td>dt_zhgxsj</td> <td>timestamp</td> <td>最后更新时间</td></tr></tbody></table></li></ul></li></ul> <h3 id="_3-2-dml"><a href="#_3-2-dml" class="header-anchor">#</a> 3.2.DML</h3> <ul><li><strong>t_aty_code</strong> <table><thead><tr><th>c_pid</th> <th>c_code</th> <th>c_name</th></tr></thead> <tbody><tr><td>50000000</td> <td>0</td> <td>统一审理待接收</td></tr> <tr><td>50000000</td> <td>1</td> <td>统一审理中</td></tr> <tr><td>50000000</td> <td>2</td> <td>统一审理退回(补充/重新)</td></tr> <tr><td>50000000</td> <td>3</td> <td>统一审理形审退回</td></tr> <tr><td>50000000</td> <td>4</td> <td>统一审理完成</td></tr> <tr><td>50000000</td> <td>5</td> <td>统一审理待受理</td></tr> <tr><td>50000000</td> <td>6</td> <td>统一审理待分配承办人</td></tr> <tr><td>50000000</td> <td>7</td> <td>内部审理退回(补充/重新)</td></tr> <tr><td>50000000</td> <td>8</td> <td>立案审查销案</td></tr> <tr><td>50000000</td> <td>11</td> <td>结案</td></tr> <tr><td>50000000</td> <td>12</td> <td>内部审理补充/重新审查重新移送</td></tr> <tr><td>50000000</td> <td>13</td> <td>审查调查补充/重新审查重新移送</td></tr> <tr><td>50000001</td> <td>1</td> <td>审查调查申请提前介入</td></tr> <tr><td>50000001</td> <td>2</td> <td>商请检察机关提前介入</td></tr> <tr><td>50000001</td> <td>3</td> <td>商请省直纪工委提前介入</td></tr> <tr><td>50000002</td> <td>1</td> <td>内部审理形式审查</td></tr> <tr><td>50000002</td> <td>2</td> <td>统一审理形式审查</td></tr> <tr><td>50000003</td> <td>1</td> <td>统一审理退回</td></tr> <tr><td>50000003</td> <td>2</td> <td>内部审理退回</td></tr> <tr><td>50000004</td> <td>3</td> <td>统一审理形审案件状态</td></tr> <tr><td>45000762</td> <td>-1</td> <td>待审批</td></tr> <tr><td>45000762</td> <td>0</td> <td>未读</td></tr> <tr><td>45000762</td> <td>1</td> <td>审批中</td></tr> <tr><td>45000762</td> <td>2</td> <td>审批结束</td></tr> <tr><td>45000762</td> <td>3</td> <td>退回</td></tr> <tr><td>45000762</td> <td>4</td> <td>撤回</td></tr> <tr><td>45000762</td> <td>5</td> <td>退回后重新发起又进行了撤回</td></tr> <tr><td>45000762</td> <td>6</td> <td>线下审批中</td></tr> <tr><td>45000762</td> <td>7</td> <td>审批结束（不同意）</td></tr> <tr><td>45000762</td> <td>8</td> <td>待选择审批人</td></tr> <tr><td>45000762</td> <td>9</td> <td>已终止审批</td></tr> <tr><td>45000762</td> <td>10</td> <td>转呈中</td></tr></tbody></table> <hr> <hr></li> <li><strong>t_aty_codetype</strong> <table><thead><tr><th>c_id</th> <th>c_name</th></tr></thead> <tbody><tr><td>50000000</td> <td>统一审理状态</td></tr> <tr><td>50000001</td> <td>提前介入类型</td></tr> <tr><td>50000002</td> <td>形式审查类型</td></tr> <tr><td>50000003</td> <td>退回类型</td></tr></tbody></table> <hr> <hr></li> <li><strong>t_zhba_splc_config</strong> <table><thead><tr><th>文书名</th> <th>审批bk</th></tr></thead> <tbody><tr><td>内部审理补充审查调查</td> <td>pzws_nbsl_bcscdc</td></tr> <tr><td>内部审理重新审查调查</td> <td>pzws_nbsl_cxscdc</td></tr> <tr><td>统一审理补充审查调查</td> <td>pzws_tysl_bcscdc</td></tr> <tr><td>统一审理重新审查调查</td> <td>pzws_tysl_cxscdc</td></tr></tbody></table></li></ul> <hr> <h2 id="_4-附录"><a href="#_4-附录" class="header-anchor">#</a> 4.附录</h2> <p>back to A6部分<a href="#2.1.A6%E9%83%A8%E5%88%86">2.1.A6部分</a></p> <h3 id="基本信息"><a href="#基本信息" class="header-anchor">#</a> 基本信息</h3> <blockquote><p>请求基本数据</p></blockquote> <ul><li>接口：ajbl/slws/getSlqk</li> <li>响应数据：在data.data中添加“是否需要移送统一审理”字段</li></ul> <blockquote><p>保存按钮点击之前需要【新加接口】</p></blockquote> <ul><li>作用：进行职级判断</li> <li>接口：</li> <li>响应数据：需要移送的，职级是：【县处级副职及以上】还是【县处级以下】；
+不需要移送的，职级是：【县处级副职以下】还是【县处级及以上】</li> <li>建议响应数据中只有一个字段：该字段只有在【需要移送 + 县处级以下】或者【不需要移送 + 县处级以上】的为true，其余都为false</li></ul> <blockquote><p>保存基本数据</p></blockquote> <ul><li>接口：ajbl/slws/bc</li> <li>请求数据：在原来的基本上添加“是否需要移送统一审理”字段</li> <li>响应数据：不变</li></ul> <h3 id="补充-重新审查调查"><a href="#补充-重新审查调查" class="header-anchor">#</a> 补充/重新审查调查</h3> <blockquote><p>相关文书模板 + 已制作文书</p></blockquote> <ul><li>作用：当前的相关模板 + 已制作文书 的展示内容 与 “退回形式”联动。
+退回形式为【退回审查调查】，文书模板展示【补充审查（调查）建议函】；
+退回形式为【重新审查调查】，文书模板展示【重新审查（调查）建议函】。</li> <li>接口：[文书模板]ajbl/slth/getWsmb [已制作文书]ajbl/slth/getWssl</li> <li>请求数据：需要后端加一些标识告知如何修改</li> <li>响应数据：不变</li></ul> <blockquote><p>历史退回记录</p></blockquote> <ul><li>接口：ajbl/slws/lsthjl</li> <li>响应数据：添加字段“退回阶段”</li></ul> <blockquote><p>历史退回记录-操作列-查看-退回相关材料信息</p></blockquote> <ul><li>接口：确认是否沿用原来的附件材料模板</li> <li>响应数据：确保里面含有字段“分类”、“密级”、“材料名称”</li></ul> <hr> <h3 id="商请省直纪工委提前介入"><a href="#商请省直纪工委提前介入" class="header-anchor">#</a> 商请省直纪工委提前介入</h3> <blockquote><p>请求提前介入信息【新加接口】</p></blockquote> <ul><li>接口：</li> <li>请求数据：</li> <li>响应数据：</li></ul> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;code&quot;</span><span class="token operator">:</span><span class="token number">200</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;data&quot;</span><span class="token operator">:</span><span class="token punctuation">{</span>
+    <span class="token property">&quot;派驻纪检监察组&quot;</span><span class="token operator">:</span> <span class="token string">&quot;驻xx纪检监察组&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;立案时间&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2020-03-12&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;被审查调查人&quot;</span><span class="token operator">:</span> <span class="token string">&quot;选中的人员id&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;出生年月&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019.02.11&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;工作单位&quot;</span><span class="token operator">:</span> <span class="token string">&quot;工作单位信息&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;职务&quot;</span><span class="token operator">:</span> <span class="token string">&quot;职务信息&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;案由&quot;</span><span class="token operator">:</span> <span class="token string">&quot;案由xxxxxx&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;是否留置&quot;</span><span class="token operator">:</span> <span class="token string">&quot;是否的单值代码&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;留置时间&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2020-03-11&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;是否装订成卷&quot;</span><span class="token operator">:</span> <span class="token string">&quot;是否的单值代码&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;案卷数量&quot;</span><span class="token operator">:</span> <span class="token number">11</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;是否形成审查调查报告初稿&quot;</span><span class="token operator">:</span> <span class="token string">&quot;是否的单值代码&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;主要违纪违法事实及倾向性意见&quot;</span><span class="token operator">:</span> <span class="token string">&quot;111111&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;提前介入原因&quot;</span><span class="token operator">:</span> <span class="token string">&quot;eqweqewqewqeq&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;审批开关状态&quot;</span><span class="token operator">:</span> <span class="token string">&quot;审批开关是否打开&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;审批状态&quot;</span><span class="token operator">:</span> <span class="token string">&quot;未提起审批|审批中|审批不通过|审批通过&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;success&quot;</span><span class="token operator">:</span><span class="token boolean">true</span>
+<span class="token punctuation">}</span>
+</code></pre></div><blockquote><p>提前介入信息 - 被审查调查人下拉数据</p></blockquote> <ul><li>接口：ajbl/slth/getOptionValue</li> <li>请求数据：固定一下dmlx对应标识</li> <li>响应数据：</li></ul> <blockquote><p>提前介入信息 - 保存【新加接口】</p></blockquote> <ul><li>接口：</li> <li>请求数据：</li></ul> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;派驻纪检监察组&quot;</span><span class="token operator">:</span> <span class="token string">&quot;驻xx纪检监察组&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;立案时间&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2020-03-12&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;被审查调查人&quot;</span><span class="token operator">:</span> <span class="token string">&quot;选中的人员id&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;出生年月&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019.02.11&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;工作单位&quot;</span><span class="token operator">:</span> <span class="token string">&quot;工作单位信息&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;职务&quot;</span><span class="token operator">:</span> <span class="token string">&quot;职务信息&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;案由&quot;</span><span class="token operator">:</span> <span class="token string">&quot;案由xxxxxx&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;是否留置&quot;</span><span class="token operator">:</span> <span class="token string">&quot;是否的单值代码&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;留置时间&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2020-03-11&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;是否装订成卷&quot;</span><span class="token operator">:</span> <span class="token string">&quot;是否的单值代码&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;案卷数量&quot;</span><span class="token operator">:</span> <span class="token number">11</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;是否形成审查调查报告初稿&quot;</span><span class="token operator">:</span> <span class="token string">&quot;是否的单值代码&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;主要违纪违法事实及倾向性意见&quot;</span><span class="token operator">:</span> <span class="token string">&quot;111111&quot;</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;提前介入原因&quot;</span><span class="token operator">:</span> <span class="token string">&quot;eqweqewqewqeq&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ul><li>响应数据： 保存成功、失败提示语以及标识</li></ul> <blockquote><p>提前介入信息 - 提起审批【新加接口】</p></blockquote> <ul><li>接口：</li> <li>请求数据：</li> <li>响应数据： 校验后返回发起审批弹窗页面的url</li></ul> <blockquote><p>附件材料信息</p></blockquote> <ul><li>接口：ajbl/slth/uploadFile</li> <li>请求数据：告知标识</li> <li>响应数据：不变</li></ul> <hr> <h3 id="审理谈话"><a href="#审理谈话" class="header-anchor">#</a> 审理谈话</h3> <blockquote><p>请求谈话记录数据</p></blockquote> <ul><li>接口：ajbl/slth/getSlthList</li> <li>响应数据：需要在data的数组对象中添加 1. “数据状态”，数据状态一共有：待审批、审批中、谈话中、审批退回、已撤回、审批不通过、终止审批、转呈中、谈话中、已结束；
+2. “当前记录的审批开关是否被打开”；
+3. “当前记录的审批记录链接”【判断一下是前端拼接还是后端】；</li></ul> <blockquote><p>谈话记录-添加接口</p></blockquote> <ul><li>接口：ajbl/slth/insertSlth</li> <li>请求数据：需要后端判断一下==&gt; 是否需要在保存/或者提起审批的时候，将谈话方案文书模板、已制作文书和纸质文书及材料信息一起提供给这个接口；</li> <li>响应数据：在slth中添加一个“数据状态”</li></ul> <blockquote><p>谈话记录-编辑接口【沿用添加接口】</p></blockquote> <ul><li>接口：ajbl/slth/insertSlth</li> <li>请求数据：添加一个标识字段用于区分“新增”还是“编辑”【如果可以根据id判断也行】</li> <li>响应数据：在slth中添加一个“数据状态”</li></ul> <blockquote><p>谈话记录-添加/编辑弹窗-文书模板+已制作文书</p></blockquote> <ul><li>接口：[文书模板]ajbl/slth/getWsmb [已制作文书]ajbl/slth/getWssl</li> <li>请求数据：需要后端加一些标识告知如何修改</li> <li>响应数据：不变</li></ul> <blockquote><p>谈话记录-添加-提起审批、谈话记录-操作栏-提交审批【新加接口】</p></blockquote> <ul><li>接口：</li> <li>请求数据：该接口会在添加/编辑保存接口之后调用【确认需要哪些前端提供哪些数据】</li> <li>响应数据：需要校验，并告知是否成功，成功返回发起审批弹窗的地址，失败需要告知失败</li></ul> <blockquote><p>谈话记录-操作栏-删除【新加接口】</p></blockquote> <ul><li>接口：</li> <li>请求数据：当前数据的cBh</li> <li>响应数据：告知是否成功以及成功、失败的提示语</li></ul> <hr> <h3 id="延长审理时限"><a href="#延长审理时限" class="header-anchor">#</a> 延长审理时限</h3> <blockquote><p>请求历史延长记录【新接口】</p></blockquote> <ul><li>接口：</li> <li>响应数据</li></ul> <div class="language-json extra-class"><pre class="language-json"><code>  <span class="token punctuation">{</span>
+    <span class="token property">&quot;code&quot;</span><span class="token operator">:</span><span class="token number">200</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;data&quot;</span><span class="token operator">:</span><span class="token punctuation">{</span>
+      <span class="token property">&quot;设置的延长次数&quot;</span><span class="token operator">:</span> <span class="token number">99</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;list&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+          <span class="token string">&quot;当前数据唯一标识&quot;</span>：<span class="token string">&quot;1232132432423&quot;</span><span class="token punctuation">,</span>  
+          <span class="token property">&quot;申请延长日期&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2018-03-10&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;申请延长天数&quot;</span><span class="token operator">:</span> <span class="token number">30</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;原办结日期&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2018-03-22&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;申请延长理由&quot;</span><span class="token operator">:</span> <span class="token string">&quot;dsadadann南京的撒娇的&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;审批状态&quot;</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;审批记录地址&quot;</span><span class="token operator">:</span> <span class="token string">&quot;http://dsadsadas&quot;</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;success&quot;</span><span class="token operator">:</span><span class="token boolean">true</span>
+  <span class="token punctuation">}</span>
+</code></pre></div><p>其中，审批状态的对应值以及状态种类 应该与 【审理谈话-请求谈话记录数据】接口中的“数据状态”一致</p> <blockquote><p>历史延长记录 - 操作列- 删除【新接口】</p></blockquote> <ul><li>接口：</li> <li>请求接口：当前数据id</li> <li>响应数据：删除成功、失败的提示语以及标识</li></ul> <hr> <h3 id="移送省直纪工委"><a href="#移送省直纪工委" class="header-anchor">#</a> 移送省直纪工委</h3> <blockquote><p>请求移送省直纪工委统一审理数据【新接口】</p></blockquote> <ul><li>接口：</li> <li>响应数据</li></ul> <div class="language-json extra-class"><pre class="language-json"><code>  <span class="token punctuation">{</span>
+    <span class="token property">&quot;code&quot;</span><span class="token operator">:</span><span class="token number">200</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;data&quot;</span><span class="token operator">:</span><span class="token punctuation">{</span>
+      <span class="token property">&quot;是否采取留置措施&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span>|<span class="token boolean">false</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;采取留置措施天数&quot;</span><span class="token operator">:</span> <span class="token number">99</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;移送统一审理日期&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-10-01&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;审批开关状态&quot;</span><span class="token operator">:</span> <span class="token string">&quot;审批开关是否打开&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;审批状态&quot;</span><span class="token operator">:</span> <span class="token string">&quot;未提起审批|审批中|审批不通过|审批通过&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;success&quot;</span><span class="token operator">:</span><span class="token boolean">true</span>
+  <span class="token punctuation">}</span>
+</code></pre></div><blockquote><p>移送省直纪工委统一审理 -文书模板+已制作文书</p></blockquote> <ul><li>接口：[文书模板]ajbl/slth/getWsmb [已制作文书]ajbl/slth/getWssl</li> <li>请求数据：需要后端加一些标识告知如何修改</li> <li>响应数据：不变</li></ul> <blockquote><p>移送省直纪工委统一审理 - 保存【新加接口】</p></blockquote> <ul><li>接口：</li> <li>请求数据：</li></ul> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;移送统一审理日期&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2019-10-01&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ul><li>响应数据： 保存成功、失败提示语以及标识</li></ul> <blockquote><p>移送省直纪工委统一审理 - 提起审批【新加接口】</p></blockquote> <ul><li>接口：</li> <li>请求数据：</li> <li>响应数据： 校验后返回发起审批弹窗页面的url</li></ul> <blockquote><p>附件材料信息</p></blockquote> <ul><li>接口：ajbl/slth/uploadFile</li> <li>请求数据：告知标识</li> <li>响应数据：不变</li></ul> <p>from wangpeng-2:
+部分通过，下列问题需要关注</p> <ol><li>现有slbl的接口定义与公司restful接口规范不一致；应考虑在后续版本调整，新接口应向新标准靠齐</li> <li>类型字段不要定义”是否xx“，应考虑”xx类型“并定义code，易拓展；如果坚持”是否xx“，应使用【code：是否，1是2否】</li> <li>“统一审理参照权限字梳理文档”；权限字依照安徽项目经验，发布的权限字需要与功能有对应关系，隐藏模块不要启用权限字；数据权限应*开头；应梳理一般内容发出；派驻做为整体系统，UIM中派驻分组应包含范围内（审查、审理、fpcbr等）的所有权限字</li> <li>“列表查询条件增加条件字段，c_tyslzt=null”，使用is null，或启用0这个状态位，使用 = 0；</li> <li>实现中在后台数据插入时做好数据校验，防止插重数据导致的问题；页面按钮等控制防不住用户重复打开多页面，做相同操作；如移送再移送，退回再退回</li> <li>未见消息平台消息相关设计；考虑消息平台发送消息失败处理机制，联系孔祥懿，基于组件包完善</li></ol></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.f21cdc56.js" defer></script><script src="/assets/js/2.9f03f641.js" defer></script><script src="/assets/js/10.c680aa57.js" defer></script>
+  </body>
+</html>
