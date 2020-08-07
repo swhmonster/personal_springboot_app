@@ -1,43 +1,66 @@
 <template>
-  <div class="hello" >
-    <!--<h1>{{ msg }}</h1>
-    <h2>{{ msg2 }}</h2>
-    <h3>{{ msg3 }}</h3>
-    <h4>{{ msg4 }}</h4>
-    <h5>{{ msg5 }}</h5>-->
-    <!--<div style="width:300px;margin:0 auto; padding:20px 0;">
-      <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32010602010775"
-         style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
-        <img src="../assets/beian.png" style="float:left;"/>
-        <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">苏公网安备
-          32010602010775号</p></a>
-    </div>-->
-  </div>
+  <div class="container">
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                  aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Walter Sun</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#/md" target="_blank">Documents</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                 aria-expanded="false">Dropdown <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li>
+            <li><a href="../navbar-static-top/">Static top</a></li>
+            <li><a href="../navbar-fixed-top/">Fixed top</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div><!--/.container-fluid -->
+    </nav>
+    <!-- Main component for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <h1>Walter Sun</h1>
+      <h2>Welcome, the new world is building...</h2>
+      <p>My blog: https://blog.csdn.net/Soul_Programmer_Swh</p>
+      <p>My github: https://github.com/swhmonster</p>
+      <p>My email: swh7941@qq.com</p>
+      <p>
+        <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">Learn more &raquo;</a>
+      </p>
+    </div>
+  </div> <!-- /container -->
 </template>
 
 <script>
 export default {
   name: 'HelloWorld',
   data () {
-    return {
-      // msg: 'Walter Sun',
-      // msg2: 'Welcome, the new world is building...',
-      // msg3: 'My blog:https://blog.csdn.net/Soul_Programmer_Swh',
-      // msg4: 'My github:https://github.com/swhmonster',
-      // msg5: 'My email:swh7941@qq.com'
-    }
+    return {}
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  h1,h2 {
-    font-weight: bolder;
-    font-size: xx-large;
-  }
-  h3,h4,h5{
-    font-weight: lighter;
-    font-size: small;
-  }
 </style>

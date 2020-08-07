@@ -20,12 +20,12 @@ import lombok.ToString;
 @ApiModel(value = "ResponseEntity", description = "请求响应体")
 public class SpbtResponseEntity {
     @JsonProperty("code")
-    @ApiModelProperty(value = "主键编号")
+    @ApiModelProperty(value = "状态码")
     private int code;
     @JsonProperty("message")
-    @ApiModelProperty(value = "主键编号")
+    @ApiModelProperty(value = "信息")
     private String message;
     @JsonProperty("data")
-    @ApiModelProperty(value = "主键编号")
+    @ApiModelProperty(value = "数据")
     private Object data;
 }

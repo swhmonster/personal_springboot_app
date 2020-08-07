@@ -1,5 +1,5 @@
 module.exports = {
-  dest:'static/',
+  dest:'static/vuepress',
   title: 'VuePress',
   description: 'the new world',
   home: true,
@@ -10,8 +10,8 @@ module.exports = {
   actionLink: null,
   footer:null,
   themeConfig: {
+    sidebar:false,
     navbar:false,
-    sidbar:false,
     search:false,
     displayAllHeaders: true
   }
