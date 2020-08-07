@@ -4,4 +4,3 @@ server:
     session:
       cookie:
         http-only: true
-    context-path: /

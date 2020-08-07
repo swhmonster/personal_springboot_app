@@ -29,9 +29,6 @@ public class MdToHtmlController {
     @Value("${server.port}")
     private String port;
 
-    @Value("${server.servlet.context-path}")
-    private String contextPath;
-
     private static final String FILE_PATH = "static/vuepress/mdfiles/";
     private static final String FILE_NAME = "fileName";
     private static final String FILE_ADRESS = "fileAddress";
@@ -42,11 +39,7 @@ public class MdToHtmlController {
     public SpbtResponseEntity getMarkdownFile() {
         File file = new File("src/main/resources/static/static/vuepress/mdfiles");
         List<File> fileList = Arrays.asList(file.listFiles());
-        String hostAddress = /*InetAddress.getLocalHost().getHostAddress()
-                + SeperateConstant.SEPERATE_YWMH.getSeperate()
-                + port
-                + contextPath
-                +*/ FILE_PATH;
+        String hostAddress =FILE_PATH;
         List<Map<String, String>> linkList = new ArrayList<>();
         fileList.forEach(e -> {
             Map<String, String> map = new HashMap<>();
