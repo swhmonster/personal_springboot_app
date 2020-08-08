@@ -4,3 +4,6 @@ server:
     session:
       cookie:
         http-only: true
+
+markdown:
+  filepath: D:\project\mdfiles
