@@ -6,4 +6,4 @@ server:
         http-only: true
 
 markdown:
-  filepath: D:\project\mdfiles
+  filepath:

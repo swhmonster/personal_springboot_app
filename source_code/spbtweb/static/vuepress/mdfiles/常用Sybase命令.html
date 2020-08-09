@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Sybase命令 | VuePress</title>
+    <meta name="generator" content="VuePress 1.5.3">
+    
+    <meta name="description" content="the new world">
+    <link rel="preload" href="/assets/css/0.styles.faa5717b.css" as="style"><link rel="preload" href="/assets/js/app.69ae8183.js" as="script"><link rel="preload" href="/assets/js/2.8e39465d.js" as="script"><link rel="preload" href="/assets/js/8.fb9637e9.js" as="script"><link rel="prefetch" href="/assets/js/3.60bef8a5.js"><link rel="prefetch" href="/assets/js/4.d5118a2a.js"><link rel="prefetch" href="/assets/js/5.22b4d1a0.js"><link rel="prefetch" href="/assets/js/6.1b83c1e4.js"><link rel="prefetch" href="/assets/js/7.00aeeac9.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.faa5717b.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-navbar no-sidebar"><!----> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <!----> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="sybase命令"><a href="#sybase命令" class="header-anchor">#</a> Sybase命令</h1> <p>@[toc]</p> <h2 id="数据库配置"><a href="#数据库配置" class="header-anchor">#</a> 数据库配置</h2> <h3 id="修改最大连接数为500"><a href="#修改最大连接数为500" class="header-anchor">#</a> 修改最大连接数为500</h3> <div class="language- extra-class"><pre class="language-text"><code>sp_configure 'number of user connections',500
+go
+</code></pre></div><h3 id="查询设备数"><a href="#查询设备数" class="header-anchor">#</a> 查询设备数</h3> <div class="language- extra-class"><pre class="language-text"><code>sp_configure 'number of devices'
+go
+</code></pre></div><h3 id="修改设备数为100"><a href="#修改设备数为100" class="header-anchor">#</a> 修改设备数为100</h3> <div class="language- extra-class"><pre class="language-text"><code>sp_configure 'number of devices'，100
+go
+</code></pre></div><h3 id="缺省缓存分配页大小"><a href="#缺省缓存分配页大小" class="header-anchor">#</a> 缺省缓存分配页大小</h3> <div class="language- extra-class"><pre class="language-text"><code>sp_poolconfig 'default data cache','200M','16K'
+go
+</code></pre></div><h3 id="最大锁数"><a href="#最大锁数" class="header-anchor">#</a> 最大锁数</h3> <div class="language- extra-class"><pre class="language-text"><code>sp_configure 'number of locks',100000
+go
+</code></pre></div><h3 id="配置最大内存数"><a href="#配置最大内存数" class="header-anchor">#</a> 配置最大内存数</h3> <div class="language- extra-class"><pre class="language-text"><code>sp_configure 'max memory' ,2097151
+go
+</code></pre></div><h3 id="配置最大在线cpu"><a href="#配置最大在线cpu" class="header-anchor">#</a> 配置最大在线CPU</h3> <div class="language- extra-class"><pre class="language-text"><code>sp_configure 'max online engines',4
+go
+alter thread pool syb_default_pool with thread count = 4
+go
+</code></pre></div><h3 id="配置启动cpu个数"><a href="#配置启动cpu个数" class="header-anchor">#</a> 配置启动cpu个数</h3> <div class="language- extra-class"><pre class="language-text"><code>sp_configure 'number of engines at startup',4 
+go
+</code></pre></div><h3 id="配置最大内存数-2"><a href="#配置最大内存数-2" class="header-anchor">#</a> 配置最大内存数</h3> <div class="language-sql extra-class"><pre class="language-sql"><code>sp_configure <span class="token string">'max memory'</span> <span class="token punctuation">,</span><span class="token number">2097151</span>  <span class="token comment">--单位2k</span>
+go
+</code></pre></div><h3 id="分配最大存储过程缓存"><a href="#分配最大存储过程缓存" class="header-anchor">#</a> 分配最大存储过程缓存</h3> <div class="language-sql extra-class"><pre class="language-sql"><code>sp_configure <span class="token string">'procedure cache size'</span><span class="token punctuation">,</span><span class="token number">102400</span>  <span class="token comment">--单位2k</span>
+go
+</code></pre></div><h3 id="配置高速缓存"><a href="#配置高速缓存" class="header-anchor">#</a> 配置高速缓存</h3> <div class="language- extra-class"><pre class="language-text"><code>sp_cacheconfig 'default data cache' , '700M'
+go
+</code></pre></div><h3 id="网络包大小"><a href="#网络包大小" class="header-anchor">#</a> 网络包大小</h3> <div class="language- extra-class"><pre class="language-text"><code>sp_configure 'max network packet size',1024
+go
+</code></pre></div><h3 id="最大打开对象"><a href="#最大打开对象" class="header-anchor">#</a> 最大打开对象</h3> <div class="language- extra-class"><pre class="language-text"><code>sp_configure 'number of open object',9000
+go
+</code></pre></div><h3 id="最大索引"><a href="#最大索引" class="header-anchor">#</a> 最大索引</h3> <div class="language- extra-class"><pre class="language-text"><code>sp_configure 'number of open indexes',10000
+go
+</code></pre></div><h3 id="最大锁数-2"><a href="#最大锁数-2" class="header-anchor">#</a> 最大锁数</h3> <div class="language- extra-class"><pre class="language-text"><code>sp_configure 'number of locks',100000
+go
+</code></pre></div><h3 id="增加网络内存"><a href="#增加网络内存" class="header-anchor">#</a> 增加网络内存</h3> <div class="language- extra-class"><pre class="language-text"><code>sp_configure 'additional network memory',1024
+go
+</code></pre></div><h3 id="锁内存"><a href="#锁内存" class="header-anchor">#</a> 锁内存</h3> <div class="language- extra-class"><pre class="language-text"><code>sp_configure 'lock shared memory',512
+go
+</code></pre></div><h3 id="优化tempdb"><a href="#优化tempdb" class="header-anchor">#</a> 优化tempdb</h3> <div class="language- extra-class"><pre class="language-text"><code>select dbid, name,segmap
+from sysusages, sysdevices
+where sysdevices.low &lt;= sysusages.size +vstart
+and sysdevices.high &gt;=sysusages.size+vstart -1
+and dbid =2
+and (status=2 or status=3) 
+go
+use tempdb
+go
+sp_dropsegment 'logsegment', 'tempdb', 'master' 
+go
+sp_dropsegment 'system', 'tempdb', 'master' 
+go
+sp_dropsegment 'default', 'tempdb', 'master' 
+Go
+
+select dbid, name,segmap
+from sysusages, sysdevices
+where sysdevices.low &lt;= sysusages.size +vstart
+and sysdevices.high &gt;=sysusages.size+vstart -1
+and dbid =2
+and (status=2 or status=3) 
+go
+sp_cacheconfig tempdb_cache, '100M'
+go
+sp_poolconfig tempdb_cache,'50M','16K'
+go
+sp_bindcache 'tempdb_cache',tempdb
+go
+sp_helpcache tempdb_cache
+select name,id from syscharsets
+dbcc traceon(3604)
+dbcc memusage
+</code></pre></div><h2 id="数据库安装"><a href="#数据库安装" class="header-anchor">#</a> 数据库安装</h2> <h3 id="数据库安装的优化"><a href="#数据库安装的优化" class="header-anchor">#</a> 数据库安装的优化</h3> <h4 id="应用数据库使用裸设备"><a href="#应用数据库使用裸设备" class="header-anchor">#</a> 应用数据库使用裸设备</h4> <p>若在UNIX（UNIXWARE）操 作系统下安装数据库服务器，请将SYBASE应用数据库的设备(device)安装成裸设备。即在创建应用数据库设备 （如：IVSP，DB160，NAP2000等）时用裸设备，把文件名指向 /dev/dsk/ 子目录下的相应文件。系统数据库设备（如:master等）仍然指向文件系统。</p> <h4 id="补丁程序"><a href="#补丁程序" class="header-anchor">#</a> 补丁程序</h4> <p>完成SYBASE数据库的安装，请注意原版的SYBASE软件都会带有最新的补丁，一定要把补丁打上，否则会出现一些莫名其妙的问题。FOR NT 版的补丁是一个ZIP文件，解压至C:/SYBASE子目录即可。</p> <h4 id="安装-sybase-在线帮助"><a href="#安装-sybase-在线帮助" class="header-anchor">#</a> 安装 SYBASE 在线帮助</h4> <p>在安装好 SYBASE 后，在安装目录下有一文件：../scripts/ins_syn_sql，在服务器上执行该脚本：</p> <div class="language- extra-class"><pre class="language-text"><code>Sybase for Unix版：./isql -Usa -P -i../scripts/ins_syn_sql
+Sybase for Winnt版：isql -Usa -P -i/sybase/scripts/ins_syn_sql
+</code></pre></div><p>执行完毕后，即可在任意的 SYBASE 客户端上连接上 SQL SERVER ，在线取得任意命令的帮助：</p> <div class="language- extra-class"><pre class="language-text"><code>sp_syntax &quot;关键字&quot;
+如：sp_syntax &quot;alter&quot; 即可列出所有包含&quot;alter&quot;字符的命令
+</code></pre></div><h3 id="数据库配置的优化"><a href="#数据库配置的优化" class="header-anchor">#</a> 数据库配置的优化</h3> <h4 id="优化master数据库"><a href="#优化master数据库" class="header-anchor">#</a> 优化master数据库</h4> <p>首先加大master设备空间，初始默认为30M，加大为150M。然后加大master数据库空间，默认数据段和日志段各为5M大小，建议改为数据段100M，日志段50M：</p> <div class="language- extra-class"><pre class="language-text"><code>alter database master on master=95
+</code></pre></div><h4 id="优化tempdb数据库"><a href="#优化tempdb数据库" class="header-anchor">#</a> 优化tempdb数据库</h4> <p>首先创建tempdb设备，分配给tempdb数据库，默认tempdb数据库数据段和日志段各为2M大小，并创建在master设备上，建议改为数据段200M，日志段50M，创建在tempdb设备上：</p> <div class="language- extra-class"><pre class="language-text"><code>alter database tempdb on tempdb=200
+</code></pre></div><p>SQL SEVRER所有用户都共享工作表和临时表的tempdb数据库，tempdb主要瓶颈是磁盘I/0。解决办法是把tempdb放在更快的设备上。在 UNIX环境中，把tempdb放在文件系统中而不用原始的设备。由于tempdb在创建数据时，自动在master设备上创建为2M的数据库，为了减少 冲突，最好的办法是把tempdb从master设备中移走。为了达到上述目的，可采用如下办法实现：</p> <ul><li>在单用户状态下启动SQL SERVER，启动单用户方法：</li></ul> <div class="language- extra-class"><pre class="language-text"><code>dataserver -dmaster.dat -m
+</code></pre></div><ul><li>以sa登录</li> <li>在文件系统中创建一个哑数据库</li> <li>删除sysusages和 sysdatabase表中对现有tempdb数据库的引用</li> <li>获取哑数据库的数据库ID，相应修改sysusages和 ysdatabase表对tempdb的引用</li> <li>重新启动数据库</li></ul> <p>以在newdevice中创建200M的tempdb数据库为例，执行过程如下：</p> <div class="language- extra-class"><pre class="language-text"><code>create database newtemp on newdevice=200
+go /* 创建新的数据库 */
+begin tran
+go /* 开始事务，防止操作错误时破坏整个SQL SERVER的运行*/
+delete sysusages where dbid = 2
+delete sysdatabases where dbid = 2
+go /*删除系统表对tempdb的引用，只能在单用户状态下执行*/
+select dbid from sysdatabases where name = ‘newtemp’
+go /*获取newtemp数据库ID，假定为10*/
+update sysusages set dbid = 2 where dbid=10
+update sysdatabases set name=’tempdb’,dbid=2 where name=’newtemp’
+go /*修改数据库的引用，对newtemp的引用改为对tempdb的引用*/
+select name,dbid, from sysdatabases where name = ‘tempdb’
+select * from sysusages where dbid = 2
+go /*测试修改是否正确，正确则提交，否则可用rollback回退*/
+commit tran
+go /*修改成功，重新启动系统*/
+</code></pre></div><p><strong>注意：这种方法只对tempdb有效，其他数据库不能采用这种方法。因为在SQL SERVER启动时，tempdb每次都重新初始化。</strong></p> <h4 id="优化系统参数"><a href="#优化系统参数" class="header-anchor">#</a> 优化系统参数</h4> <p>以下参数为标准建议值，可根据实际情况修改。
+优化系统参数的SQL脚本注释</p> <div class="language- extra-class"><pre class="language-text"><code>sp_configure 'total memory', 100000
+</code></pre></div><p>优化数据库的内存，应根据不同机器配置设置, 建议为一半的物理内存大小。以db_block为单位，即每个单位为2k，上例为200M，默认为24M：</p> <div class="language- extra-class"><pre class="language-text"><code>sp_configure &quot;lock scheme&quot; , 1,&quot;datarows&quot; // 系统默认为表级锁，优化为行锁
+sp_configure &quot;number of locks&quot; , 10000 // 加大最大锁进程数, 默认为5000。
+alter table table_name lock datarows // 如果设置一个已经存在的表(tabel)的锁方式为行锁
+sp_configure 'procedure cache percent' ,30 // 缺省值：20 建议值：procedure使用频率高时采用较大的值，不超过30
+sp_configure &quot;number of user connections&quot;,100 // 最大用户连接数，默认为25，每个连接要占70k内存
+sp_configure 'number of devices',20 // 将最大设备文件数据改为15个
+sp_configure ‘number of Open databases’,20 // 最大打开数据库个数，对于需在一台数据库服务上打个多个数据库则需加大此参数，默认为15
+Sp_configure ‘max online engines CPU’,2 // 缺省值：1 建议值：采用实际机器的CPU个数
+Sp_configure ‘total data cache size’,60000 // 缺省值：0 建议值：使用SQL SERVER内存的30%
+</code></pre></div><p>如果上述参数改动后SYBASE启动不正常，则可检查SYBASE的错误日志，把SYBASE.cfg中的相应选项修改为较小的值。
+附：SYBASE SQL SERVER 内存的分配</p> <ul><li>SQL SERVER 可执行代码        3-4M</li> <li>SQL SERVER 使用的静态内存        2.2-3.25M</li> <li>用户可配置的参数所占用内存，以下示例(11.9.2版)：</li></ul> <table><thead><tr><th>配置项</th> <th>默认值</th> <th>内存占用</th></tr></thead> <tbody><tr><td>用户连接数(user connections)</td> <td>25</td> <td>70k/个</td></tr> <tr><td>打开的数据库数(open database)</td> <td>12</td> <td>60k/个</td></tr> <tr><td>打开的对象数(open objects)</td> <td>500</td> <td>1k/个</td></tr> <tr><td>打开的索引数(open indexs)</td> <td>500</td> <td>1k/个</td></tr> <tr><td>锁数目(locks)</td> <td>5000</td> <td>0.1k/个</td></tr> <tr><td>数据库设备数(data device)</td> <td>10</td> <td>0.5k/个</td></tr></tbody></table> <ul><li>剩余部份分配
+过程缓存 ( 由 procedure cache percent 决定，默认值为 20% )
+数据缓存 ( 默认值为减去1、2、3项的 80% )</li></ul> <h4 id="优化数据库系统属性"><a href="#优化数据库系统属性" class="header-anchor">#</a> 优化数据库系统属性</h4> <p>-方法一：在sybase center中选择数据库属性，将属性中options选项中的下列项目选中。</p> <div class="language- extra-class"><pre class="language-text"><code>allow select into/bulk copy
+truncate log on checkpoint
+checkpoint on recovery
+abort transction on full log
+free space accounting
+allow nulls by default
+auto identity column in non-unquie index 
+</code></pre></div><ul><li>方法二：在SQLPLUS中执行下列SQL脚本，如：</li></ul> <div class="language- extra-class"><pre class="language-text"><code>sp_dboption mydb,&quot;abort tran on log full&quot;,true（设定当数据库的日志空间满时，就终止该进程，使用 sa 用户）
+
+sp_dboption mydb,&quot; trunc log on chkpt &quot;,true
+sp_dboption mydb,&quot; no chkpt on recovery&quot;,true
+sp_dboption mydb,&quot; no free space acctg &quot;,true
+sp_dboption mydb,&quot;allow nulls by default&quot;,true
+sp_dboption mydb,&quot; auto identity dbo use only &quot;,true
+</code></pre></div><h4 id="创建阈值存储过程"><a href="#创建阈值存储过程" class="header-anchor">#</a> 创建阈值存储过程</h4> <p>可根据不同的应用修改以下脚本或创建多个阈值存储过程，并在配置阈值时指定相应的存储过程：</p> <div class="language- extra-class"><pre class="language-text"><code>create procedure sp_thresholdaction 
+@dbname varchar(30),
+@segmentname varchar(30),
+@free_space int,
+@status int as dump transaction @dbname with no_log 
+print &quot;LOG DUMP: '%1!' for '%2!' dumped&quot;,@segmentname,@dbname
+go
+</code></pre></div><h4 id="配置多个阈值"><a href="#配置多个阈值" class="header-anchor">#</a> 配置多个阈值</h4> <ul><li>方法一：
+打开 Sybase Central，双击相应数据库(database)的段 Segments -&gt;; logsegment，在Thresholds 页面中可设置自动清除日志的阀值。其中有 Last Chance 的一行是系统默认的最后机会阀值，即系统日志空闲空间小于该值时为最后一次自动清除日志的机会。设置时阀值的大小可设为日志总空间大小的20%左右。
+另外再增加多个阈值。</li> <li>方法二：
+<ul><li>使用如下指令查出数据库中日志的容量（用页表示）</li></ul> <div class="language- extra-class"><pre class="language-text"><code>select sum(size) from master..sysusages where dbid=db_id(&quot;database_name&quot; and (segmap&amp;4)=4
+</code></pre></div><ul><li>使用sp_addthreshold增加新的阈值，大小为日志容量的50%,如上面语句显示值为2048</li></ul> <div class="language- extra-class"><pre class="language-text"><code>sp_addthreshold database_name,logsegment,1024，proc_dump_display
+</code></pre></div></li></ul> <p><strong>注意：因一个大事务时可能会越过当前的threshold，所以必须加多个threshold，
+使用命令select @@thresh_hysteresis查看数据库的滞后值，如结果为64页，则下一个阈值设为&quot;最近的阈值-（2*64）&quot;，请在所设阈值再按这种原则各增加两个更小的阈值。</strong></p> <h3 id="索引的优化"><a href="#索引的优化" class="header-anchor">#</a> 索引的优化</h3> <p>在良好的数据库设计基础上，需高效地使用索引，并经常的维护索引，下文介绍关于索引的相关内容。</p> <h4 id="创建索引"><a href="#创建索引" class="header-anchor">#</a> 创建索引</h4> <p>索引分为三类：聚簇索引(clustered indexes)、非聚簇索引(nonclustered indexes)、覆盖索引(covering indexes)
+鉴于索引加快了查询速度，但减慢了数据更新速度的特点。可通过在一个段上建表，而在另一个段上建其非聚簇索引，而这两段分别在单独的物理设备上来改善操作性能。
+create [unique][clustered|nonclustered] index index_name on table_name(column_name...)</p> <h4 id="重建索引"><a href="#重建索引" class="header-anchor">#</a> 重建索引</h4> <p>随着数据行的插入、删除和数据页的分裂，有些索引页可能只包含几页数据，另外应用在执行大块I/O的时候，重建非聚簇索引可以降低分片，维护大块I/O的效率。重建索引实际上是重新组织B-树空间。在下面情况下需要重建索引：</p> <ul><li>数据和使用模式大幅度变化。</li> <li>排序的顺序发生改变。</li> <li>要进行大量插入操作或已经完成。</li> <li>使用大块I/O的查询的磁盘读次数比预料的要多。</li> <li>由于大量数据修改，使得数据页和索引页没有充分使用而导致空间的使用超出估算。</li> <li>dbcc检查出索引有问题。</li></ul> <p>当重建聚簇索引时,这张表的所有非聚簇索引将被重建.</p> <h4 id="索引统计信息的更新"><a href="#索引统计信息的更新" class="header-anchor">#</a> 索引统计信息的更新</h4> <p>当在一个包含数据的表上创建索引的时候，SQL Server会创建分布数据页来存放有关索引的两种统计信息：分布表和密度表。优化器利用这个页来判断该索引对某个特定查询是否有用。但这个统计信息并不 动态地重新计算。这意味着，当表的数据改变之后，统计信息有可能是过时的，从而影响优化器追求最有工作的目标。因此，在下面情况下应该运行update statistics命令：</p> <ul><li>数据行的插入和删除修改了数据的分布。</li> <li>对用truncate table删除数据的表上增加数据行。</li> <li>修改索引列的值。</li></ul> <h3 id="查询优化"><a href="#查询优化" class="header-anchor">#</a> 查询优化</h3> <h4 id="not-in子句"><a href="#not-in子句" class="header-anchor">#</a> NOT IN子句</h4> <p>不知大家是否喜欢使用‘NOT IN’这样的操作，如果是，那尽量使用(NOT) EXISTS 替代。
+例子：</p> <div class="language- extra-class"><pre class="language-text"><code>语句1
+SELECT dname, deptno FROM dept WHERE deptno NOT IN (SELECT deptno FROM emp);
+语句2
+SELECT dname, deptno FROM dept WHERE NOT EXISTS (SELECT deptno FROM emp WHERE dept.deptno = emp.deptno);
+</code></pre></div><p>明显的，2要比1的执行性能好很多，因为1中对emp进行了full table scan,这是很浪费时间的操作。而且1中没有用到emp的index，因为没有where子句。而2中的语句对emp进行的是range scan。</p> <h4 id="海量查询"><a href="#海量查询" class="header-anchor">#</a> 海量查询</h4> <ul><li>在海量查询时尽量少用格式转换。</li></ul> <div class="language- extra-class"><pre class="language-text"><code>如用
+WHERE a.order_no = b.order_no
+而不用
+WHERE TO_NUMBER (substr(a.order_no, instr(b.order_no, '.') - 1)= TO_NUMBER (substr(a.order_no, instr(b.order_no, '.') - 1)
+</code></pre></div><ul><li>查询海量数据是可以使用optimizer hints，例如/*+ORDERED */</li></ul> <div class="language- extra-class"><pre class="language-text"><code>如用
+SELECT /*+ FULL(EMP) */ E.ENAME FROM EMP E WHERE E.JOB = 'CLERK';
+而不用
+SELECT E.ENAME FROM EMP E WHERE E.JOB || '' = 'CLERK';
+</code></pre></div><ul><li><p>对于数据量较大和业务功能较复杂的系统，Sybase的默认参数根本无法满足需要，必须进行优化。系统数据库方面的优化从两方面进行，一个是调 整数据库系统的一些性能参数的值，另一个是应用程序的调优。应用程序的调优调整hsql和sql的写法，配合sql合理的建索引，这里主要对Sybase 系统一些基本的性能参数的调优进行一个小结：</p> <ul><li>内存
+内存是对性能影响最大，也是最需要也是最难调优的地方。内存调优一定要，常用的需要调整的参数有：</li></ul> <div class="language- extra-class"><pre class="language-text"><code>sp_configure 'max memory',XXXXXXX (设置为服务器内存的75%,重启生效)
+sp_configure 'allocate max shared mem',1 (启动的时候自动分配max memory指定的最大内存)
+sp_cacheconfig 'default data cache','1300M'(设置数据缓存为max memory的一半)
+sp_cacheconfig 'default data cache','cache_partition=2'
+sp_configure 'procedure cache size',102400 (过程高速缓存,通常是max mem20%-30%,这里是200M,在大量的执行sql的时候这个参数一定要调大)
+</code></pre></div><p>实际中遇到一个很头痛的问题， 32位Windows版本的Sybase 最大内存只能到搞到3G左右，&quot;default data cache&quot;的值超过 1500M Sybase实例就起不来了，导致服务器的16G内存形同虚设，所以如果大家的项目和我这个类似，服务器和操作系统由客户提供，还换不了的，内存不妨要求 个4G就够了，多了也浪费。</p> <ul><li>CPU
+当服务器的CPU个数多于一个时，可以考虑多CPU。实际上对于OS会自动调度，设一下只不过是控制的更精确一点。实际需要根据CPU数来修改，若CPU=N，一般设置为N-1。设置这个参数，比如我的服务器8个CPU, 就像下面这样设置：</li></ul> <div class="language- extra-class"><pre class="language-text"><code>sp_configure 'max online engines',7
+sp_configure 'number of engines at startup',7
+sp_configure 'max parallel degree',1 (并行的度，大于或等于1)
+sp_configure 'number of worker processes',7 (并行度＊并发连接数＊1.5倍)
+</code></pre></div><ul><li>连接数(这个没什么说的，数量管够就可以，默认数为25，可根据应用需要来修改。)</li></ul></li></ul> <div class="language- extra-class"><pre class="language-text"><code>    sp_configure 'number of user connections',600
+    查询数据库死进程
+    select * from master..syslogshold
+</code></pre></div><div class="language- extra-class"><pre><code>- 锁
+数据库的锁机制其实是一个比较复杂的话题，这里只能简单说一下。Sybase数据库系统两个级别的锁机制：所有页锁、数据页锁。所有页锁在当数据库加锁时，既锁数据页，也锁索引页；数据页锁当数据库加锁时，只锁数据页，不锁索引页。
+Sybase支持三种类型的锁: 数据表锁、数据页锁、数据行锁。 一些常用的调优命令和策略如下:
+```
+sp_configure 'number of locks',50000 （设置锁的数量）
+```
+系统设置时要把锁的数量设大一点，简单说就是要管够；如果需要节省空间，减少维护量，使用所有页锁机制；而如果需要加快速度，空间足够，使用数据页锁机制。
+```
+sp_sysmon '00:10:00',locks （检测表的使用情况）
+```
+当通过监测发现锁竞争超过15%时，首先修改加锁最重的表的锁机制，然后再把数据页锁设置为数据行锁。如果发现螺旋锁多，则为该表建立单独的命名缓存并对命名缓存进行分区。
+
+- I/O
+</code></pre></div><p>数据库调优总的思路是尽量减少和分散物理I/O，尽量减少网络I/O。
+减少物理I/O的办法有： 在命名缓存中增加大块的I/O缓冲池，把数据分散到多个硬盘上,采用RAID技术,建立段，使一个表跨越多个硬盘等等，基本和其他的数据库软件调优一样。
+减少网络I/O的办法是采用大数据包。</p> <div class="language- extra-class"><pre><code>```
+sp_configure &quot;default network packet size&quot;,2048 设置网络传送包的大小(需要重启动)
+sp_configure &quot;max network packet size&quot;,2048
+```
+</code></pre></div><h2 id="sybase使用"><a href="#sybase使用" class="header-anchor">#</a> Sybase使用</h2> <h3 id="sql-advantage使用"><a href="#sql-advantage使用" class="header-anchor">#</a> SQL Advantage使用</h3> <p>先点击server，里面点击connect连接到sybase服务端，开一个新窗口，写一些sql执行即可（ctrl+e）</p> <h3 id="启动和关闭数据库，查看表结构"><a href="#启动和关闭数据库，查看表结构" class="header-anchor">#</a> 启动和关闭数据库，查看表结构</h3> <ul><li>看所有的库</li></ul> <div class="language- extra-class"><pre class="language-text"><code>sp_helpdb
+</code></pre></div><ul><li>使用一个库</li></ul> <div class="language- extra-class"><pre class="language-text"><code>use 库名（注意大小写）
+</code></pre></div><ul><li>查看用户下所有表名</li></ul> <div class="language- extra-class"><pre class="language-text"><code>select name from sysobjects where type='U'
+或
+sp_tables
+</code></pre></div><ul><li>查看表结构</li></ul> <div class="language- extra-class"><pre class="language-text"><code>sp_help 表名（注意大小写）
+</code></pre></div><ul><li>显示结果只显示一行</li></ul> <div class="language- extra-class"><pre class="language-text"><code>set rowcount 1
+go
+</code></pre></div><ul><li>输入你想查询的sql语句，记得最后要</li></ul> <div class="language- extra-class"><pre class="language-text"><code>set rowcount 0
+go
+</code></pre></div><ul><li>启动数据库</li></ul> <div class="language- extra-class"><pre class="language-text"><code>[sybase@rosan128main install]$ pwd
+/opt/sybase/ASE-12_5/install
+[sybase@rosan128main install]$ ./RUN_rosantech &amp;
+</code></pre></div><ul><li>关闭数据库</li></ul> <div class="language- extra-class"><pre class="language-text"><code>先要看启动了什么服务
+1&gt; select srvname from sysservers
+2&gt; go
+ srvname                        
+ ------------------------------ 
+ SYB_BACKUP                     
+ loopback                       
+ rosanljw_BS                    
+ rosantech                      
+
+(4 rows affected)
+
+关闭备份服务
+1&gt; shutdown SYB_BACKUP
+2&gt; go
+
+关闭
+1&gt; shutdown with nowait
+2&gt; go
+</code></pre></div><h3 id="dml和ddl"><a href="#dml和ddl" class="header-anchor">#</a> DML和DDL</h3> <div class="language- extra-class"><pre class="language-text"><code>--建表
+use test
+go
+
+create table table1
+(test varchar(10))
+go
+
+--仿照table1建立table2
+select * from table1 into table2
+go
+--------------------------------------------------------------------------------------
+
+--如果不能仿照需要修改一些参数
+sp_helpdb db_name    --查看SELECT into选项是否开启，没开需要手动开启
+go
+ 
+use master
+go
+
+sp_dboption test,'select into',true        --（test为db_name）
+go
+
+checkpoint
+go
+
+use test
+go
+
+select * from table1 into table2
+go
+</code></pre></div><h3 id="用户管理"><a href="#用户管理" class="header-anchor">#</a> 用户管理</h3> <ul><li>创建登陆用户（login）</li></ul> <div class="language- extra-class"><pre class="language-text"><code>sp_addlogin user,user_password    --依次为用户名，密码
+go
+</code></pre></div><ul><li>数据库添加用户</li></ul> <div class="language- extra-class"><pre class="language-text"><code>use YWST 
+GO
+sp_adduser user
+GO
+</code></pre></div><ul><li>删除用户</li></ul> <div class="language- extra-class"><pre class="language-text"><code>sp_dropuser user
+go
+</code></pre></div><ul><li>删除登录用户</li></ul> <div class="language- extra-class"><pre class="language-text"><code>sp_droplogin user
+go
+</code></pre></div><h3 id="sybase-ase参数配置"><a href="#sybase-ase参数配置" class="header-anchor">#</a> Sybase ASE参数配置</h3> <ul><li><p>服务器级配置
+使用存储过程sp_configure配置ASE (和oracle的show parameter很像)</p> <ul><li>语法</li></ul> <div class="language- extra-class"><pre class="language-text"><code>sp_configure [configname[, configvalue] | group_name | non_unique_parameter_fragment]
+</code></pre></div><ul><li>作用
+查询服务器运行的当前值，设置服务器运行参数
+用 &quot;sp_configure mem&quot; 可以查看带有mem关键字的参数的具体配置，然后用&quot;sp_configure 参数, 值&quot;来配置新</li></ul></li></ul> <div class="language- extra-class"><pre class="language-text"><code>例1. 配置内存
+1)数据库使用内存
+指定ASE拥有的总的共享内存大小
+sp_configure 'max memory',nnn(单位为2K）( HP平台推荐物理内存的75%，其他平台80%)
+sp_configure 'allocate max shared mem',1（数据库服务启动时就分配内存）(推荐为1)
+2)配置缺省数据缓存的大小和分区
+sp_cacheconfig 'default data cache','xxxM'
+sp_cacheconfig 'default data cache','cache_partition=n'
+(根据CPU个数以及内存大小确定，需为2的N次方)
+3)配置存储过程的缓存大小
+sp_configure 'procedure cache size',nnn(单位为2K)
+
+例2. 配置CPU
+sp_configure‘max online engines’,n(cpu个数&gt; 2时推荐CPU数目减1)
+sp_configure‘number of engines at startup’,n
+3. 其他
+1). number of devices (用户自己确定)
+指定ASE的可创建和打开的数据库设备的最大号数
+2). number of locks (用户自己确定)
+指定ASE可同时打开的锁的最大数目
+3). number of open objects (推荐8000-20000)
+ASE的对象描述的缓存数
+4)number of open indexes (推荐2000-5000)
+ASE的索引描述的缓存数
+5) stack size (如果有超长SQL和多层嵌套，推荐*2)
+数据库堆栈的大小
+6). default character set id(推荐使用cp936 –id 171)
+数据库服务器使用的字符集
+7). allow updates to system tables
+指定系统管理员是否可以更改系统表中的数据
+8)row lock promotion HWM，row lock promotion LWM
+行锁升级为表锁的阀值
+9)page lock promotion HWM，page lock promotion LWM
+页锁升级为表锁的阀值
+10) lock scheme
+缺省的对表加的锁类型(缺省为页锁)
+</code></pre></div><ul><li><p>数据库级配置
+使用存储过程sp_dboption更改数据库的数据库选项</p> <ul><li>语法sp_dboption[dbname, optname, {true | false}]</li> <li>作用
+罗列出所有的数据库选项
+更改某个数据库的数据库选项</li> <li>常见的数据库选项</li></ul> <div class="language- extra-class"><pre class="language-text"><code>trunclog on chkpt自动清日志(不能再做增量备份)
+select into/bulkcopy允许快速BCP,selectinto
+ddlin tran允许事务中创建对象
+</code></pre></div></li></ul> <p>修改完成以后可以通过sp_helpdb查看到</p> <div class="language- extra-class"><pre class="language-text"><code>例子：
+1&gt; use master
+2&gt; go
+
+1&gt; sp_dboptionuserdb, &quot;trunclog on chkpt&quot;, true
+2&gt; go
+数据库‘userdb'的数据库选项'trunclog on chkpt'被打开。
+在被改变数据库中运行CHECKPOINT命令。
+(return status = 0)
+
+1&gt; use userdb
+2&gt; go
+1&gt; checkpoint
+2&gt; go
+</code></pre></div><ul><li>修改字符集为中文
+<ul><li>先进入到中文字符集的目录，把中文加载一下</li></ul> <div class="language- extra-class"><pre class="language-text"><code>[sybase@rosan128main cp936]$ pwd
+/opt/sybase/charsets/utf8
+
+[sybase@rosan128main cp936]$ charset -Usa -P123456 -SNP binary.srt utf8
+Loading file 'binary.srt'.
+
+</code></pre></div></li></ul> <p>Found a [sortorder] section.</p> <p>This is Class-1 sort order.</p> <p>Character set for the sort order is already in the Syscharsets table.</p> <p>Finished loading file 'binary.srt'.</p> <p>1 sort order loaded successfully
+```</p> <ul><li>修改默认字符集为中文
+首先查一下默认的中文字符集的id<div class="language-sql extra-class"><pre class="language-sql"><code><span class="token punctuation">[</span>sybase_W<span class="token variable">@sybase</span> utf8<span class="token punctuation">]</span>$ isql <span class="token operator">-</span>Usa <span class="token operator">-</span>P123456 <span class="token operator">-</span>SNP_W
+<span class="token number">1</span><span class="token operator">&gt;</span> sp_helpsort <span class="token comment">--的缺省排序顺序和字符集</span>
+<span class="token number">2</span><span class="token operator">&gt;</span> go
+Collation Name                 Collation ID
+ <span class="token comment">------------------------------ ------------</span>
+ altdict                                  <span class="token number">45</span>
+</code></pre></div></li></ul> <p>......中间省略
+Sort Order Description</p> <div class="language- extra-class"><pre><code> ------------------------------------------------------------------
+ Character Set = 190, utf8		--utf8
+     Unicode 3.1 UTF-8 Character Set
+     Class 2 Character Set
+ Sort Order = 45, altdict		--45
+     Alternate (lower-case first) dictionary ordering
+(return status = 0)
+1&gt; sp_configure 'default sortorder id',50	--需要重启生效，第一次重启会失败，再重启一次
+2&gt; go
+</code></pre></div><p>1&gt; exit
+[sybase_W@sybase utf8]$
+```</p> <ul><li>查看数据库信息</li></ul> <div class="language- extra-class"><pre class="language-text"><code>sp_helpdb        --(查看所有数据库信息)
+go
+
+sp_helpdb test         --(查看test数据库详细信息)
+go
+</code></pre></div><ul><li>查看ASE的远程服务器</li></ul> <div class="language- extra-class"><pre class="language-text"><code>sp_helpserver
+go
+</code></pre></div><ul><li>查看数据库对象的信息</li></ul> <div class="language- extra-class"><pre class="language-text"><code>sp_helpdevice      --设备信息
+sp_helpdb          --所有数据库的信息
+sp_helptext        --存储过程名字
+
+sp_spaceused         --查看一个当前库(需要use 数据库)或表占所占用的空间
+sp_recompile （+usertable）    --重新编译存储过程和触发器。与该表相关联的存储过程和触发器在第一次运行时，自动重新编译
+</code></pre></div><ul><li>常用dbcc命令</li></ul> <div class="language- extra-class"><pre class="language-text"><code>dbcctraceon(3604)                     --(随后的dbcc命令结果输出到屏幕)
+dbcctraceon(3605)                     --(随后的dbcc命令结果输出到错误日志文件)
+dbcccheckalloc[ (database_name[, fix | nofix] ) ]     --(检查分配页)
+dbcccheckcatalog[ (database_name) ]             --(检查系统表)
+dbcccheckdb[ (database_name[, skip_ncindex] ) ]     --(检查数据库)
+dbccchecktable( { table_name| table_id}         --(检查表)
+[, skip_ncindex] )
+dbcctablealloc( { table_name| table_id}         --(检查表分配页)
+[, { full | optimized | fast | null }
+[, fix | nofix] ] ) |
+</code></pre></div><ul><li>常用系统表</li></ul> <div class="language- extra-class"><pre class="language-text"><code>sysdatabases        --记录所有数据库基本信息
+sysusages        --数据库空间分配情况
+sysdevices        --数据库设备信息
+syslogins        --数据库服务器登录信息
+sysusers        --数据库用户信息
+sysobjects        --数据库对象表(U 用户表，P 存储过程)
+sysprocesses        --进程表
+</code></pre></div><ul><li>日常常规维护(性能优化)</li> <li>更新统计信息</li></ul> <div class="language- extra-class"><pre class="language-text"><code>update statistics (+usertable)    --不会对表上锁，不影响业务，但比较耗资源 (optdiag)
+</code></pre></div><ul><li><p>整理数据库垃圾空间
+重建表的聚簇索引
+对行锁表执行reorg
+如何加快上述操作 (配置I/O，并行)
+<strong>注意：以上操作对表上锁，另外，必须有足够的空间来执行(剩余空间必须为最大表的1.2倍左右) (sp_spaceusedusertable)</strong></p></li> <li><p>重新编译存储过程和触发器</p></li></ul> <div class="language- extra-class"><pre class="language-text"><code>sp_recompile (+usertable)    --与该表相关联的存储过程和触发器在第一次运行时，自动重新编译
+</code></pre></div><h3 id="数据库备份"><a href="#数据库备份" class="header-anchor">#</a> 数据库备份</h3> <p>系统管理员每天必须作数据库的备份</p> <ul><li>备份的命令</li></ul> <div class="language- extra-class"><pre class="language-text"><code>dump database YWST to '/home/sybase/dump/YWST.dmp'  --此路径为数据库服务器上的真实路径
+go
+</code></pre></div><ul><li>恢复的命令</li></ul> <div class="language- extra-class"><pre class="language-text"><code>load database YWST from '/home/sybase/dump/YWST.dmp'
+go
+</code></pre></div><p>可以增加数据设备文件或者扩大已有设备文件的大小</p> <h3 id="日常维护"><a href="#日常维护" class="header-anchor">#</a> 日常维护</h3> <ul><li><p>碎片整理</p> <p>此操作会锁表，需要每月在空闲时间执行一次</p></li></ul> <div class="language-sql extra-class"><pre class="language-sql"><code>reorg rebuild 表名
+go
+</code></pre></div><ul><li>更新统计值</li></ul> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">update</span> <span class="token keyword">statistics</span> T_MS_AJ
+go
+</code></pre></div><h3 id="常用的存储过程和命令"><a href="#常用的存储过程和命令" class="header-anchor">#</a> 常用的存储过程和命令</h3> <p>以下存储过程可作为日常问题排查用</p> <div class="language- extra-class"><pre class="language-text"><code>sp_who            (查看用户进程)
+sp_lock            (查看数据库锁状况)
+sp_help            (查看对象信息)
+sp_helpdb        (查看数据库信息)
+sp_helpdevice        (查看设备信息)
+sp_spaceused        (查看表占用的空间大小)
+select @@version    (查看版本号)
+dbcc sqltext(@spid)    (查看@spid执行的sql语句)
+sp_showplan @spid,null,null,null        (查看@spid的执行计划)
+</code></pre></div><ul><li>sp__getlock</li></ul> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token comment">--sp__getlock，查看数据库当前锁</span>
+
+<span class="token keyword">use</span> sybsystemprocs
+go
+
+<span class="token keyword">if</span> object_id<span class="token punctuation">(</span><span class="token string">'sp__getlock'</span><span class="token punctuation">)</span> <span class="token operator">is</span> <span class="token operator">not</span> <span class="token boolean">null</span>
+    <span class="token keyword">drop</span> <span class="token keyword">procedure</span> sp__getlock
+go
+
+<span class="token keyword">create</span> <span class="token keyword">procedure</span> sp__getlock
+<span class="token keyword">as</span>
+<span class="token keyword">begin</span>
+<span class="token keyword">declare</span> <span class="token variable">@temp_sql</span>     <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">500</span><span class="token punctuation">)</span>
+<span class="token keyword">declare</span> <span class="token variable">@sql</span>          <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">10000</span><span class="token punctuation">)</span>
+<span class="token keyword">declare</span> <span class="token variable">@unionsql</span>     <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">10000</span><span class="token punctuation">)</span>
+<span class="token keyword">declare</span> <span class="token variable">@unionsql2</span>    <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">10000</span><span class="token punctuation">)</span>
+<span class="token keyword">declare</span> <span class="token variable">@dbname</span>       <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>
+<span class="token keyword">declare</span> dbname_cursor <span class="token keyword">cursor</span> <span class="token keyword">for</span> <span class="token keyword">select</span> name <span class="token keyword">from</span> master<span class="token punctuation">.</span><span class="token punctuation">.</span>sysdatabases
+<span class="token keyword">set</span> <span class="token variable">@temp_sql</span> <span class="token operator">=</span> <span class="token string">' select id as objid,name as objname,db_id(''@dbname'') as dbid from @dbname..sysobjects '</span>
+<span class="token keyword">set</span> <span class="token variable">@sql</span> <span class="token operator">=</span> <span class="token string">'select lc.spid as spid,pr.spid as &quot;进程ID&quot; , '</span>
+            <span class="token operator">+</span> <span class="token string">' pr.ipaddr as &quot;IP地址&quot;, '</span>
+            <span class="token operator">+</span> <span class="token string">' pr.program_name as &quot;应用名称&quot;, '</span>
+            <span class="token operator">+</span> <span class="token string">' pr.cmd AS &quot;执行命令&quot;, '</span>
+            <span class="token operator">+</span> <span class="token string">' db_name(lc.dbid) as &quot;数据库名&quot;, '</span>
+            <span class="token operator">+</span> <span class="token string">' obj.objname as &quot;对象名&quot;, '</span>
+            <span class="token operator">+</span> <span class="token string">' (case when lc.type = 1 then ''排他表锁'' '</span>
+            <span class="token operator">+</span> <span class="token string">'       when lc.type = 2 then ''共享表锁'' '</span> 
+            <span class="token operator">+</span> <span class="token string">'       when lc.type = 3 then ''排他意向锁'' '</span>
+            <span class="token operator">+</span> <span class="token string">'       when lc.type = 4 then ''共享意图锁'' '</span>
+            <span class="token operator">+</span> <span class="token string">'       when lc.type = 5 then ''排他页锁'' '</span>
+            <span class="token operator">+</span> <span class="token string">'       when lc.type = 6 then ''共享页锁'' '</span>
+            <span class="token operator">+</span> <span class="token string">'       when lc.type = 7 then ''更新页锁'' '</span>
+            <span class="token operator">+</span> <span class="token string">'       when lc.type = 8 then ''排他行锁'' '</span>
+            <span class="token operator">+</span> <span class="token string">'       when lc.type = 9 then ''共享行锁'' '</span>
+            <span class="token operator">+</span> <span class="token string">'       when lc.type = 10 then ''更新行锁'' '</span>
+            <span class="token operator">+</span> <span class="token string">'       when lc.type = 11 then ''共享下一键锁'' '</span>
+            <span class="token operator">+</span> <span class="token string">'       when lc.type = 256 then ''锁阻塞另一进程'' '</span>
+            <span class="token operator">+</span> <span class="token string">'       when lc.type = 512 then ''请求锁'' '</span>
+            <span class="token operator">+</span> <span class="token string">' end) as &quot;锁类型名称&quot;, '</span>
+            <span class="token operator">+</span> <span class="token string">' lc.type as &quot;锁类型&quot;, '</span>
+            <span class="token operator">+</span> <span class="token string">' pr.blocked as &quot;阻塞进程ID&quot;,'</span>
+            <span class="token operator">+</span> <span class="token string">' bl.program_name as &quot;阻塞应用名称&quot;, '</span>
+            <span class="token operator">+</span> <span class="token string">' bl.ipaddr as &quot;阻塞IP地址&quot; '</span>
+            <span class="token operator">+</span> <span class="token string">' from master..syslocks lc  '</span>
+            <span class="token operator">+</span> <span class="token string">' left join master..sysprocesses pr on lc.spid = pr.spid '</span>
+            <span class="token operator">+</span> <span class="token string">' left join master..sysprocesses bl on bl.spid = pr.blocked '</span>
+            <span class="token operator">+</span> <span class="token string">' left join ('</span>
+<span class="token keyword">open</span> dbname_cursor
+    <span class="token keyword">while</span> @<span class="token variable">@sqlstatus</span> <span class="token operator">=</span> <span class="token number">0</span> 
+    <span class="token keyword">begin</span>
+        <span class="token keyword">fetch</span> dbname_cursor <span class="token keyword">into</span> <span class="token variable">@dbname</span>
+        <span class="token keyword">set</span> <span class="token variable">@unionsql</span> <span class="token operator">=</span> <span class="token variable">@unionsql</span> <span class="token operator">+</span> str_replace<span class="token punctuation">(</span><span class="token variable">@temp_sql</span><span class="token punctuation">,</span><span class="token string">'@dbname'</span><span class="token punctuation">,</span><span class="token variable">@dbname</span><span class="token punctuation">)</span>  
+        <span class="token keyword">set</span> <span class="token variable">@unionsql</span> <span class="token operator">=</span> <span class="token variable">@unionsql</span> <span class="token operator">+</span> <span class="token string">'union all'</span>
+    <span class="token keyword">end</span>
+    <span class="token keyword">close</span> dbname_cursor
+    <span class="token keyword">deallocate</span> dbname_cursor
+<span class="token keyword">set</span> <span class="token variable">@unionsql2</span> <span class="token operator">=</span> substring<span class="token punctuation">(</span><span class="token variable">@unionsql</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span>char_length<span class="token punctuation">(</span><span class="token variable">@unionsql</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">9</span><span class="token punctuation">)</span>	
+<span class="token keyword">set</span> <span class="token variable">@sql</span> <span class="token operator">=</span> <span class="token variable">@sql</span> <span class="token operator">+</span> <span class="token variable">@unionsql2</span> <span class="token operator">+</span> <span class="token string">') obj on lc.id = obj.objid and lc.dbid = obj.dbid'</span>
+<span class="token keyword">set</span> <span class="token variable">@sql</span> <span class="token operator">=</span> <span class="token string">'select * from ('</span><span class="token operator">+</span> <span class="token variable">@sql</span> <span class="token operator">+</span><span class="token string">') t where t.spid !=@@spid'</span>
+<span class="token keyword">execute</span><span class="token punctuation">(</span><span class="token variable">@sql</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span>
+go
+</code></pre></div><ul><li>sp__getT50sql</li></ul> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token comment">--sp__getT50sql，查看数据库当前运行sql</span>
+
+<span class="token keyword">use</span> sybsystemprocs
+go
+
+<span class="token keyword">if</span> object_id<span class="token punctuation">(</span><span class="token string">'sp__getT50sql'</span><span class="token punctuation">)</span> <span class="token operator">is</span> <span class="token operator">not</span> <span class="token boolean">null</span> 
+	<span class="token keyword">drop</span> <span class="token keyword">procedure</span> sp__getT50sql
+go
+
+<span class="token keyword">create</span> <span class="token keyword">procedure</span> sp__getT50sql
+<span class="token keyword">as</span>
+<span class="token keyword">begin</span>
+
+<span class="token keyword">select</span> <span class="token keyword">top</span> <span class="token number">50</span> s<span class="token punctuation">.</span>SPID<span class="token punctuation">,</span>p<span class="token punctuation">.</span>ipaddr<span class="token punctuation">,</span>p<span class="token punctuation">.</span>program_name<span class="token punctuation">,</span>s<span class="token punctuation">.</span>CpuTime<span class="token punctuation">,</span>t<span class="token punctuation">.</span>LineNumber<span class="token punctuation">,</span>t<span class="token punctuation">.</span>SQLText
+<span class="token keyword">from</span>
+    master<span class="token punctuation">.</span><span class="token punctuation">.</span>monProcessStatement s<span class="token punctuation">,</span>
+    master<span class="token punctuation">.</span><span class="token punctuation">.</span>monProcessSQLText t<span class="token punctuation">,</span>
+    master<span class="token punctuation">.</span><span class="token punctuation">.</span>sysprocesses p
+<span class="token keyword">where</span> 
+    s<span class="token punctuation">.</span>SPID<span class="token operator">=</span>t<span class="token punctuation">.</span>SPID
+    <span class="token operator">and</span> s<span class="token punctuation">.</span>SPID <span class="token operator">=</span> p<span class="token punctuation">.</span>spid
+    <span class="token operator">and</span> p<span class="token punctuation">.</span>spid <span class="token operator">!=</span> @<span class="token variable">@spid</span>
+<span class="token keyword">order</span> <span class="token keyword">by</span> 
+    s<span class="token punctuation">.</span>CpuTime <span class="token keyword">desc</span>
+<span class="token keyword">end</span>
+go
+</code></pre></div><ul><li>sp__addUserGrant</li></ul> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token comment">--sp__addUserGrant，批量给表赋权</span>
+
+<span class="token keyword">IF</span> OBJECT_ID <span class="token punctuation">(</span><span class="token string">'dbo.sp__addUserGrant'</span><span class="token punctuation">)</span> <span class="token operator">IS</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span>
+ <span class="token keyword">DROP</span> <span class="token keyword">PROCEDURE</span> dbo<span class="token punctuation">.</span>sp__addUserGrant
+GO
+
+<span class="token keyword">create</span> <span class="token keyword">procedure</span> sp__addUserGrant
+<span class="token variable">@userid</span>    <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token variable">@grant</span>     <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token variable">@type</span>     <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span>
+
+<span class="token keyword">as</span>
+
+<span class="token keyword">begin</span>
+    <span class="token keyword">declare</span> <span class="token variable">@temp_sql</span> <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">)</span>
+    <span class="token keyword">declare</span> <span class="token variable">@sql</span> <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">)</span>
+    <span class="token keyword">declare</span> <span class="token variable">@tabname</span> <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">300</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">declare</span> tbname_cursor <span class="token keyword">cursor</span> <span class="token keyword">for</span> <span class="token keyword">select</span> name <span class="token keyword">from</span> sysobjects  <span class="token keyword">where</span> <span class="token keyword">type</span> <span class="token operator">=</span> <span class="token variable">@type</span>
+    <span class="token keyword">set</span> <span class="token variable">@temp_sql</span> <span class="token operator">=</span> <span class="token string">'grant '</span><span class="token operator">+</span><span class="token variable">@grant</span><span class="token operator">+</span><span class="token string">' on '</span>     
+    <span class="token keyword">open</span> tbname_cursor
+    <span class="token keyword">while</span> @<span class="token variable">@sqlstatus</span> <span class="token operator">=</span><span class="token number">0</span> 
+    <span class="token keyword">begin</span>
+        <span class="token keyword">fetch</span> tbname_cursor <span class="token keyword">into</span> <span class="token variable">@tabname</span>
+        <span class="token keyword">set</span> <span class="token variable">@sql</span> <span class="token operator">=</span>  <span class="token variable">@temp_sql</span> <span class="token operator">+</span> <span class="token variable">@tabname</span> <span class="token operator">+</span> <span class="token string">&quot; to  &quot;</span> <span class="token operator">+</span> <span class="token variable">@userid</span>
+        <span class="token keyword">execute</span><span class="token punctuation">(</span><span class="token variable">@sql</span><span class="token punctuation">)</span>
+    <span class="token keyword">end</span>
+    <span class="token keyword">close</span> tbname_cursor
+ <span class="token keyword">deallocate</span> tbname_cursor
+<span class="token keyword">end</span> 
+GO
+
+<span class="token comment">--- 添加登录账号</span>
+sp_addlogin newUser<span class="token punctuation">,</span><span class="token string">'qwer1234'</span>
+GO
+<span class="token comment">--- 添加用户</span>
+<span class="token keyword">use</span> YWST 
+GO
+sp_adduser newUser
+GO
+
+<span class="token comment">--- 用户赋予权限 注意是用sa分别切换到 DB_ATY/YWST/JCSZ/YYFZ</span>
+<span class="token keyword">use</span> YWST
+go
+sp__addUserGrant newUser<span class="token punctuation">,</span><span class="token string">'Select'</span><span class="token punctuation">,</span><span class="token string">'U'</span>
+GO
+sp__addUserGrant newUser<span class="token punctuation">,</span><span class="token string">'Select'</span><span class="token punctuation">,</span><span class="token string">'V'</span>
+GO
+sp__addUserGrant newUser<span class="token punctuation">,</span><span class="token string">'execute'</span><span class="token punctuation">,</span><span class="token string">'P'</span>
+GO
+</code></pre></div><ul><li>sp__getsession</li></ul> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token comment">--sp__getsession，查看当前连接应用名称、ip、连接数量</span>
+
+<span class="token keyword">use</span> sybsystemprocs
+go
+
+<span class="token keyword">if</span> object_id<span class="token punctuation">(</span><span class="token string">'sp__getsession'</span><span class="token punctuation">)</span> <span class="token operator">is</span> <span class="token operator">not</span> <span class="token boolean">null</span>
+    <span class="token keyword">drop</span> <span class="token keyword">procedure</span> sp__getsession
+go
+
+<span class="token keyword">create</span> <span class="token keyword">procedure</span> sp__getsession
+<span class="token keyword">as</span>
+
+<span class="token keyword">begin</span>
+    <span class="token keyword">select</span> program_name<span class="token punctuation">,</span>ipaddr<span class="token punctuation">,</span><span class="token function">count</span><span class="token punctuation">(</span>program_name<span class="token punctuation">)</span> <span class="token keyword">from</span> master<span class="token punctuation">.</span><span class="token punctuation">.</span>sysprocesses <span class="token keyword">group</span> <span class="token keyword">by</span> program_name<span class="token punctuation">,</span>ipaddr <span class="token keyword">order</span> <span class="token keyword">by</span> program_name
+<span class="token keyword">end</span>
+go
+</code></pre></div><ul><li>sp__getdbspaceinfo</li></ul> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token comment">--sp__getdbspaceinfo，列出各数据库数据空间、日志空间大小及剩余百分比</span>
+
+<span class="token keyword">use</span> sybsystemprocs 
+go
+
+<span class="token keyword">if</span> object_id<span class="token punctuation">(</span><span class="token string">'sp__getdbspaceinfo'</span><span class="token punctuation">)</span> <span class="token operator">is</span> <span class="token operator">not</span> <span class="token boolean">null</span> 
+    <span class="token keyword">drop</span> <span class="token keyword">procedure</span> sp__getdbspaceinfo
+go
+
+<span class="token keyword">create</span> <span class="token keyword">procedure</span> sp__getdbspaceinfo
+<span class="token keyword">as</span>
+
+<span class="token keyword">begin</span> 
+<span class="token keyword">select</span> 
+    <span class="token keyword">convert</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">,</span>db_name<span class="token punctuation">(</span>data_segment<span class="token punctuation">.</span>dbid<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">as</span> <span class="token string">&quot;库名&quot;</span><span class="token punctuation">,</span>
+    str<span class="token punctuation">(</span><span class="token function">round</span><span class="token punctuation">(</span>total_data_pages <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">1024.0</span> <span class="token operator">*</span> <span class="token number">1024</span><span class="token punctuation">)</span> <span class="token operator">/</span> @<span class="token variable">@maxpagesize</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">&quot;总数据空间(MB)&quot;</span><span class="token punctuation">,</span>
+    str<span class="token punctuation">(</span><span class="token function">round</span><span class="token punctuation">(</span>free_data_pages <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">1024.0</span> <span class="token operator">*</span> <span class="token number">1024</span><span class="token punctuation">)</span> <span class="token operator">/</span> @<span class="token variable">@maxpagesize</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">&quot;剩余数据空间(MB)&quot;</span><span class="token punctuation">,</span>
+    str<span class="token punctuation">(</span><span class="token function">round</span><span class="token punctuation">(</span>total_log_pages <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">1024.0</span> <span class="token operator">*</span> <span class="token number">1024</span><span class="token punctuation">)</span> <span class="token operator">/</span> @<span class="token variable">@maxpagesize</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">&quot;总日志空间(MB)&quot;</span><span class="token punctuation">,</span>
+    str<span class="token punctuation">(</span><span class="token function">round</span><span class="token punctuation">(</span>free_log_pages <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">1024.0</span> <span class="token operator">*</span> <span class="token number">1024</span><span class="token punctuation">)</span> <span class="token operator">/</span> @<span class="token variable">@maxpagesize</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">&quot;剩余日志空间(MB)&quot;</span><span class="token punctuation">,</span>
+    str<span class="token punctuation">(</span> <span class="token function">round</span><span class="token punctuation">(</span><span class="token number">100.0</span> <span class="token operator">*</span> free_data_pages <span class="token operator">/</span> total_data_pages <span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">&quot;剩余数据百分比%&quot;</span><span class="token punctuation">,</span>
+    str<span class="token punctuation">(</span> <span class="token function">round</span><span class="token punctuation">(</span><span class="token number">100.0</span> <span class="token operator">*</span> free_log_pages <span class="token operator">/</span> total_log_pages<span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token string">&quot;剩余日志百分比%&quot;</span>
+<span class="token keyword">from</span>
+<span class="token punctuation">(</span><span class="token keyword">select</span> dbid<span class="token punctuation">,</span>
+        <span class="token function">sum</span><span class="token punctuation">(</span>size<span class="token punctuation">)</span> total_log_pages<span class="token punctuation">,</span>
+        lct_admin<span class="token punctuation">(</span><span class="token string">'logsegment_freepages'</span><span class="token punctuation">,</span> dbid <span class="token punctuation">)</span> free_log_pages
+        <span class="token keyword">from</span> master<span class="token punctuation">.</span>dbo<span class="token punctuation">.</span>sysusages
+        <span class="token keyword">where</span> segmap <span class="token operator">&amp;</span> <span class="token number">4</span> <span class="token operator">=</span> <span class="token number">4</span> 
+        <span class="token keyword">group</span> <span class="token keyword">by</span> dbid
+<span class="token punctuation">)</span> log_segment
+<span class="token punctuation">,</span>
+<span class="token punctuation">(</span><span class="token keyword">select</span> dbid<span class="token punctuation">,</span>
+        <span class="token function">sum</span><span class="token punctuation">(</span>size<span class="token punctuation">)</span> total_data_pages<span class="token punctuation">,</span>
+        <span class="token function">sum</span><span class="token punctuation">(</span>curunreservedpgs<span class="token punctuation">(</span>dbid<span class="token punctuation">,</span> lstart<span class="token punctuation">,</span> unreservedpgs<span class="token punctuation">)</span><span class="token punctuation">)</span> free_data_pages
+        <span class="token keyword">from</span> master<span class="token punctuation">.</span>dbo<span class="token punctuation">.</span>sysusages
+        <span class="token keyword">where</span> segmap <span class="token operator">&lt;&gt;</span> <span class="token number">4</span>	
+        <span class="token keyword">group</span> <span class="token keyword">by</span> dbid 
+<span class="token punctuation">)</span> data_segment
+<span class="token keyword">where</span> data_segment<span class="token punctuation">.</span>dbid <span class="token operator">=</span> log_segment<span class="token punctuation">.</span>dbid 
+<span class="token keyword">order</span> <span class="token keyword">by</span> str<span class="token punctuation">(</span> <span class="token function">round</span><span class="token punctuation">(</span><span class="token number">100.0</span> <span class="token operator">*</span> free_data_pages <span class="token operator">/</span> total_data_pages <span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token keyword">asc</span>
+<span class="token keyword">end</span>
+
+go
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.69ae8183.js" defer></script><script src="/assets/js/2.8e39465d.js" defer></script><script src="/assets/js/8.fb9637e9.js" defer></script>
+  </body>
+</html>
