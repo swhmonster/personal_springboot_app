@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>配置步骤 | VuePress</title>
+    <meta name="generator" content="VuePress 1.5.3">
+    
+    <meta name="description" content="the new world">
+    <link rel="preload" href="/assets/css/0.styles.93986fde.css" as="style"><link rel="preload" href="/assets/js/app.55b68bf9.js" as="script"><link rel="preload" href="/assets/js/2.9f03f641.js" as="script"><link rel="preload" href="/assets/js/8.3534e3c2.js" as="script"><link rel="prefetch" href="/assets/js/10.e5cef7fc.js"><link rel="prefetch" href="/assets/js/11.4c395511.js"><link rel="prefetch" href="/assets/js/12.724a22d9.js"><link rel="prefetch" href="/assets/js/13.c526531b.js"><link rel="prefetch" href="/assets/js/3.bc083ce9.js"><link rel="prefetch" href="/assets/js/4.c57904d7.js"><link rel="prefetch" href="/assets/js/5.771430fe.js"><link rel="prefetch" href="/assets/js/6.fc0f1a92.js"><link rel="prefetch" href="/assets/js/7.0223b5ca.js"><link rel="prefetch" href="/assets/js/9.f0ac81fc.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.93986fde.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-navbar no-sidebar"><!----> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <!----> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="配置步骤"><a href="#配置步骤" class="header-anchor">#</a> 配置步骤</h1> <ol><li>开启服务器端的远程调试，配置远程调试端口</li> <li>配置IDEA远程调试</li> <li>启动IDEA的debug</li></ol> <h1 id="远端开启远程调试"><a href="#远端开启远程调试" class="header-anchor">#</a> 远端开启远程调试</h1> <p>cmd:</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token function">nohup</span> java -Xdebug -Xnoagent -Djava.compiler<span class="token operator">=</span>NONE -Xrunjdwp:transport<span class="token operator">=</span>dt_socket,address<span class="token operator">=</span><span class="token number">8888</span>,server<span class="token operator">=</span>y,suspend<span class="token operator">=</span>n -jar xspch.jar <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span>
+</code></pre></div><p><img src="https://img-blog.csdnimg.cn/20190509165101948.png" alt="在这里插入图片描述"></p> <h1 id="idea配置"><a href="#idea配置" class="header-anchor">#</a> IDEA配置</h1> <p><img src="https://img-blog.csdnimg.cn/20190509165013868.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NvdWxfUHJvZ3JhbW1lcl9Td2g=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">
+控制台出现如下图日志，即表示连接成功
+<img src="https://img-blog.csdnimg.cn/20190509165210389.png" alt="在这里插入图片描述"></p></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.55b68bf9.js" defer></script><script src="/assets/js/2.9f03f641.js" defer></script><script src="/assets/js/8.3534e3c2.js" defer></script>
+  </body>
+</html>

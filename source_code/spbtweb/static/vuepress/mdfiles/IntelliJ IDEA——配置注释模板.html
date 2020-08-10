@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Settings中 | VuePress</title>
+    <meta name="generator" content="VuePress 1.5.3">
+    
+    <meta name="description" content="the new world">
+    <link rel="preload" href="/assets/css/0.styles.93986fde.css" as="style"><link rel="preload" href="/assets/js/app.55b68bf9.js" as="script"><link rel="preload" href="/assets/js/2.9f03f641.js" as="script"><link rel="preload" href="/assets/js/7.0223b5ca.js" as="script"><link rel="prefetch" href="/assets/js/10.e5cef7fc.js"><link rel="prefetch" href="/assets/js/11.4c395511.js"><link rel="prefetch" href="/assets/js/12.724a22d9.js"><link rel="prefetch" href="/assets/js/13.c526531b.js"><link rel="prefetch" href="/assets/js/3.bc083ce9.js"><link rel="prefetch" href="/assets/js/4.c57904d7.js"><link rel="prefetch" href="/assets/js/5.771430fe.js"><link rel="prefetch" href="/assets/js/6.fc0f1a92.js"><link rel="prefetch" href="/assets/js/8.3534e3c2.js"><link rel="prefetch" href="/assets/js/9.f0ac81fc.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.93986fde.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-navbar no-sidebar"><!----> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <!----> </aside> <main class="page"> <div class="theme-default-content content__default"><h3 id="settings中"><a href="#settings中" class="header-anchor">#</a> Settings中</h3> <p>File &gt; Other Settings &gt; Default Settings … &gt; Editor &gt; File and Code Templates</p> <h3 id="配置方式"><a href="#配置方式" class="header-anchor">#</a> 配置方式</h3> <p><img src="https://img-blog.csdnimg.cn/20190330171531105.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1NvdWxfUHJvZ3JhbW1lcl9Td2g=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <p>也可以写死：</p> <div class="language- extra-class"><pre class="language-text"><code>/**
+*
+* @author yourname
+* @date ${DATE} ${TIME}
+*/
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>In this template, you can specify a code fragment to be included into file templates (Templates tab) with the help of the #parse directive. One template can be shared by several file templates. Along with static text, code and comments, you can also use predefined variables that will then be expanded like macros into the corresponding values. 
+Predefined variables will take the following values:
+${PACKAGE_NAME}
+ 
+name of the package in which the new file is created
+${USER}
+ 
+current user system login name
+${DATE}
+ 
+current system date
+${TIME}
+ 
+current system time
+${YEAR}
+ 
+current year
+${MONTH}
+ 
+current month
+${MONTH_NAME_SHORT}
+ 
+first 3 letters of the current month name. Example: Jan, Feb, etc.
+${MONTH_NAME_FULL}
+ 
+full name of the current month. Example: January, February, etc.
+${DAY}
+ 
+current day of the month
+${DAY_NAME_SHORT}
+ 
+first 3 letters of the current day name. Example: Mon, Tue, etc.
+${DAY_NAME_FULL}
+ 
+full name of the current day. Example: Monday, Tuesday, etc.
+${HOUR}
+ 
+current hour
+${MINUTE}
+ 
+current minute
+${PROJECT_NAME}
+ 
+the name of the current project
+ Apache Velocity template language is used
+</code></pre></div><h3 id="最后新建一个class文件，即可验证是否生效（无需重启idea）"><a href="#最后新建一个class文件，即可验证是否生效（无需重启idea）" class="header-anchor">#</a> 最后新建一个class文件，即可验证是否生效（无需重启IDEA）</h3></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.55b68bf9.js" defer></script><script src="/assets/js/2.9f03f641.js" defer></script><script src="/assets/js/7.0223b5ca.js" defer></script>
+  </body>
+</html>
