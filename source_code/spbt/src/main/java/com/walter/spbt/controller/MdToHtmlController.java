@@ -3,9 +3,12 @@ package com.walter.spbt.controller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,6 +42,7 @@ public class MdToHtmlController {
     public SpbtResponseEntity getMarkdownFile() {
         File file = new File(mdFilePath);
         List<File> fileList = Arrays.asList(file.listFiles());
+        fileList.sort(Comparator.comparing(File::getName));
         List<Map<String, String>> linkList = new ArrayList<>();
         fileList.forEach(e -> {
             Map<String, String> map = new HashMap<>();
