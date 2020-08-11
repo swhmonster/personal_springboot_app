@@ -47,7 +47,7 @@
       <p>My github: https://github.com/swhmonster</p>
       <p>My email: swh7941@qq.com</p>
       <p>
-        <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">Learn more &raquo;</a>
+        <a class="btn btn-lg btn-primary" target="_blank" href="https://github.com/swhmonster/personal_springboot" role="button">Learn more &raquo;</a>
       </p>
     </div>
   </div> <!-- /container -->
