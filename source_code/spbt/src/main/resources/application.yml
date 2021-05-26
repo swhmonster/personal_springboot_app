@@ -4,6 +4,9 @@ server:
     session:
       cookie:
         http-only: true
+#    context-path: /spbt
 
 #markdown:
 #  filepath:
+
+#downloadPath: E:\tempnew\

@@ -41,7 +41,7 @@ public class MdToHtmlController {
     @ResponseBody
     public SpbtResponseEntity getMarkdownFile() {
         File file = new File(mdFilePath);
-        List<File> fileList = Arrays.asList(file.listFiles());
+        List<File> fileList = Arrays.asList(Objects.requireNonNull(file.listFiles()));
         fileList.sort(Comparator.comparing(File::getName));
         List<Map<String, String>> linkList = new ArrayList<>();
         fileList.forEach(e -> {
