@@ -1,7 +1,8 @@
 # personal_springboot
 >个人全栈开发实战：麻雀虽小，五脏俱全，精简全套项目开发，扫一扫程序员日常工作中的知识盲区
 
-项目网站地址：www.waltersun.cn
+该应用已下线，网站以切流至新应用
+项目网站地址：[~~https://waltersun.cn~~](https://waltersun.cn)
 ## 技术架构
 - 总体架构
     - 前后端分离：Spring Boot + Vue-Cli + VuePress
